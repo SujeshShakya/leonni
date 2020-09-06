@@ -1,0 +1,162 @@
+﻿@model UserProfileModel
+@{
+    ViewBag.Title = "Profile";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/fileuploader.css" />
+<div id="content-wrapper">
+    <div class="user-page">
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        @using (Html.BeginForm("Profile", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.IsNew)
+            @Html.HiddenFor(x => x.Id)
+            if (Model.IsNew)
+            {
+            <div class="blue-btn view-profile-btn">
+                <input type="submit" id="submit_link" value="Create Profile" /></div>
+            }
+            else
+            {
+            <div class="profile-btns" style="margin-top: -8px;">
+                <div class="blue-btn view-profile-btn"><input type="submit" id="submit_link" value="Update" /></div>
+              @*  @if (Model.CurrentRole == "Administrator")
+                { 
+                    <div class="blue-btn update-btn" style="display: none">
+                        <a href="javascript:void(0);" onclick="ViewProfile()">View Profile</a></div>
+                }
+                else
+                {
+                    <div class="blue-btn update-btn">
+                        <a href="/ControlPanel/ViewProfile/@Model.Id"  onclick="ViewProfile()">View Profile</a></div>
+                }*@
+             @*   <div class="blue-btn"><a href="#">View Profile</a></div>*@
+            </div>
+            
+            <div class="clear"></div>
+            }
+            <div class="user-biodata">
+                <div class="field-1">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(model => model.FirstName, new { @placeholder = "First Name" })
+                        @Html.ValidationMessageFor(model => model.FirstName)</div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(model => model.SurName, new { @placeholder = "Last Name" })
+                        @Html.ValidationMessageFor(model => model.SurName)</div>
+                    <div class="field">
+                 <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                    <noscript>
+                        <p>
+                            Please enable JavaScript to use file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                    </noscript>
+                </div>
+                        <input type="file" name="ProfilePic" />
+                        @Html.ValidationMessageFor(model => model.ProfilePic)</div>
+                </div>
+                <div class="clear">
+                </div>
+                <div class="field-2">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @onchange = "GetDisciplines(this,'entry')" })
+                    </div>
+                    <div class="field pad-field">
+                        @if (Model.IsNew == true || Model.CurrentRole == "Administrator")
+                        {
+                            @Html.DropDownListFor(x => x.DisciplineId, Model.Disciplines, new { @class = "Disciplines" })
+                        }
+                        else
+                        { 
+                            @Html.DropDownListFor(x => x.DisciplineId, (SelectList)ViewBag.DisciplineId, new { @class = "Disciplines" })
+                        }
+                    </div>
+                    <div class="upload-img"><img alt="" src="/en-US/File/Picture/121?width=150&amp;height=200"></div>
+                </div>
+                <div class="clear">
+                </div>
+                <div class="field-3">
+                    <div class="summary-field">
+                        @Html.TextBoxFor(model => model.Summary, new { @placeholder = "Summary 120 characters" })
+                    </div>
+                    <div class="summary">
+                        @Html.TextAreaFor(model => model.Description, new { @placeholder = "Description" })
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Occupation, new { @placeholder = "Occupation" })</div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Company, new { @placeholder = "Company" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.Sex, Model.Sexs)</div>
+                    <div class="field">
+                        @Html.EditorFor(x => x.BirthDate, new { @placeholder = "BirthDate" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Phone, new { @placeholder = "Phone No." })</div>
+                    <div class="field pad-field" style="width: 230px; float: left;">
+                        @Html.TextBoxFor(x => x.WebLink, new { @placeholder = "WebLink" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.CountryName, Model.Countries, new { @onchange = "GetProvinces(this,'entry')", @class = "CountryName" })</div>
+                    <div class="field">
+                        @if (Model.IsNew || Model.CurrentRole == "Administrator")
+                        {
+                            @Html.DropDownListFor(x => x.StateId, Model.Provinces, new { @class = "Provinces" })
+                        }
+                        else
+                        { 
+                            @Html.DropDownListFor(x => x.StateId, (SelectList)ViewBag.ProvinceId, new { @class = "Provinces" })
+                        }
+                    </div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Locality, new { @placeholder = "Locality" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Address, new { @placeholder = "Address" })
+                        @Html.ValidationMessageFor(x => x.Address)
+                    </div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.ZipCode, new { @placeholder = "Zip Code" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                @if (Model.CurrentRole == "Administrator")
+                {
+                    Html.RenderAction("ProfileSearch", "ControlPanel");
+                }
+            </div>
+           
+        }
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+<script src="~/Scripts/GlobalSearch.js" type="text/javascript"></script>
+<script src="~/Scripts/Profile.js" type="text/javascript"></script>
+<script src="~/Scripts/AdminOptions.js" type="text/javascript"></script>
+<script type="text/javascript" src="~/Scripts/fileuploader.js"></script>
+<script type="text/javascript">
+    if ($("#user-list-partial").length > 0) {
+        List(currentPageNumber, takeNumber, "users");
+    }
+</script>

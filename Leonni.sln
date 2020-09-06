@@ -1,0 +1,72 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leonni", "Leonni\Leonni.csproj", "{BC2A9D70-B8FB-4B79-B948-B2F696F0DEBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leonni.Core", "Leonni.Core\Leonni.Core.csproj", "{125A32F0-E2EF-4F4A-82FE-1441E72BA31F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leonni.Models", "Leonni.Data\Leonni.Models.csproj", "{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leonni.Interfaces", "Leonni.Interfaces\Leonni.Interfaces.csproj", "{58C92473-B293-4B89-9182-565506E19073}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leonni.Repositories", "Leonni.Repositories\Leonni.Repositories.csproj", "{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{35C9F065-009A-4912-835F-83E4409F4EFF}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://leonni.no-ip.org:8080/tfs/leonniprojectcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Leonni\\Leonni.csproj
+		SccProjectName1 = Leonni
+		SccLocalPath1 = Leonni
+		SccProjectUniqueName2 = Leonni.Core\\Leonni.Core.csproj
+		SccProjectName2 = Leonni.Core
+		SccLocalPath2 = Leonni.Core
+		SccProjectUniqueName3 = Leonni.Data\\Leonni.Models.csproj
+		SccProjectName3 = Leonni.Data
+		SccLocalPath3 = Leonni.Data
+		SccProjectUniqueName4 = Leonni.Interfaces\\Leonni.Interfaces.csproj
+		SccProjectName4 = Leonni.Interfaces
+		SccLocalPath4 = Leonni.Interfaces
+		SccProjectUniqueName5 = Leonni.Repositories\\Leonni.Repositories.csproj
+		SccProjectName5 = Leonni.Repositories
+		SccLocalPath5 = Leonni.Repositories
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC2A9D70-B8FB-4B79-B948-B2F696F0DEBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC2A9D70-B8FB-4B79-B948-B2F696F0DEBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC2A9D70-B8FB-4B79-B948-B2F696F0DEBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC2A9D70-B8FB-4B79-B948-B2F696F0DEBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{125A32F0-E2EF-4F4A-82FE-1441E72BA31F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125A32F0-E2EF-4F4A-82FE-1441E72BA31F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125A32F0-E2EF-4F4A-82FE-1441E72BA31F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125A32F0-E2EF-4F4A-82FE-1441E72BA31F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58C92473-B293-4B89-9182-565506E19073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58C92473-B293-4B89-9182-565506E19073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58C92473-B293-4B89-9182-565506E19073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58C92473-B293-4B89-9182-565506E19073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

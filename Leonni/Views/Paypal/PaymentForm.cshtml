@@ -1,0 +1,28 @@
+﻿@model Leonni.Models.ViewModels.PaypalModel
+@using Leonni.Core
+@{
+    ViewBag.Title = "Paypal Invoice";
+}
+<p>
+    Please wait while you are being redirected to paypal...</p>
+<form action="@AppSettings.PaypalUrl" name="frmchkoutpay" method="post">
+<input type="hidden" name="cmd" value="_xclick" />
+<input type="hidden" name="rm" value="2" />
+<input type="hidden" name="quantity" value="@Model.Quantity" />
+<input type="hidden" name="amount" value="@Model.Amount" />
+<input type="hidden" name="business" value="@AppSettings.PaypalBusinessEmail"/>
+@*<input type="hidden" name="return" value="@AppSettings.SiteUrlBase@AppSettings.PaypalReturnUrl" />*@
+<input type="hidden" name="return" value="@AppSettings.SiteUrlBase@AppSettings.PaypalReturnUrl" />
+<input type="hidden" name="cancel_return" value="@AppSettings.SiteUrlBase@AppSettings.PaypalCancelReturnUrl" />
+@*<input type="hidden" name="invoice" value="@Model.ID" />*@ @*<input type="hidden" name="custom" value="1234" />*@
+<input type="hidden" name="cpp_header_image" value="@AppSettings.PaypalHeaderImageUrl" />
+<input type="hidden" name="item_name" value="Leonni Invoice for purchase of @ViewBag.Clicks clicks" />
+<input type="hidden" name="no_shipping" value="1" />
+<input type="hidden" name="no_note" value="1" />
+<input type="hidden" name="currency_code" value="USD" />
+@*<input type="hidden" name="on0" value="" />
+<input type="hidden" name="os0" value="" />*@
+</form>
+<script type="text/javascript">
+    document.frmchkoutpay.submit();
+</script>

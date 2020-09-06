@@ -1,0 +1,9 @@
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\Leonni.Interfaces.dll
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\Leonni.Interfaces.pdb
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\Leonni.Models.dll
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\EntityFramework.dll
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\Leonni.Models.pdb
+C:\LeonniSocial\Leonni\Leonni.Interfaces\bin\Debug\EntityFramework.xml
+C:\LeonniSocial\Leonni\Leonni.Interfaces\obj\Debug\ResolveAssemblyReference.cache
+C:\LeonniSocial\Leonni\Leonni.Interfaces\obj\Debug\Leonni.Interfaces.dll
+C:\LeonniSocial\Leonni\Leonni.Interfaces\obj\Debug\Leonni.Interfaces.pdb

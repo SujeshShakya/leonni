@@ -1,0 +1,97 @@
+﻿@model BaseViewModel
+@if (!Request.IsAuthenticated)
+{
+    <div class="log">
+        @using (Ajax.BeginForm("JsonLogin", "Account", null, new AjaxOptions { OnSuccess = "loginSuccess" }, new { id = "logInForm" }))
+        {
+            <div class="textfield">
+                @Html.TextBoxFor(x => x.CurrentUser.UserName, new { placeholder = @Html.Translate("Home", "EnterEmail"), id = "username", @class="email-field" })
+                @*@Html.TextBoxFor(m =>m.CurrentUser.  , new { placeholder = @Html.Translate("Home", "EnterEmail"), id = "username" })*@
+                @Html.ValidationMessageFor(m => m.CurrentUser.UserName)</div>
+            <div class="textfield">
+                @Html.PasswordFor(m => m.CurrentUser.Password, new { placeholder = @Html.Translate("Home", "EnterPassword"), id = "password" })
+                @Html.ValidationMessageFor(m => m.CurrentUser.Password)</div>
+            <ul class="left-link">
+                <li>@*<a href="javascript:void(0);" id="controlPanel">Log In </a>*@
+                    <input class="home-login-button" type="submit" value="Log In" />
+                </li>
+                <li><a href="javascript:void(0);" id="recoverPassword">@Html.Translate("Home", "RecoverPassword")</a></li>
+                <li><a href="javascript:void(0);" id="register">@Html.Translate("Home", "Register")</a></li>
+            </ul>
+            <div class="accept-select">
+                <div class="chk">
+                    <div class="chk-box">
+                        <input type="checkbox" value="" /></div>
+                    <div class="chk-content">@Html.Translate("Home", "AcceptTheConditionOfUse")</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                <div class="chk">
+                    <div class="chk-box">
+                        <input type="checkbox" value="" /></div>
+                    <div class="chk-content">@Html.Translate("Home", "AcceptThePrivacyPolicies")
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+<script type="text/javascript">
+
+    $('#register').click(function () {
+        if ($('#username').val() != "") {
+            $('#register').html('Registering...Please Wait');
+            $.ajax({
+                url: LeonniUrl("/Account/JsonRegister"),
+                type: "POST",
+                data: "username=" + $('#username').val() + "&password=" + $('#password').val(),
+                dataType: "json",
+                success: function (response) {
+                    $('#register').html('Register');
+                    if (response.success) {
+
+                        Leonni.ShowSuccessMessage("A request has been sent to " + $('#username').val() + " Please confirm the request and proceed as mentioned in the mail!");
+                        $("#username").val('');
+                        $("#password").val('');
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errors);
+                    }
+                }
+            });
+        }
+    });
+
+    function loginSuccess(data) {
+        if (data.status == "success") {
+            window.location.href = LeonniUrl("/home/index");
+        }
+        else if (data.status == "error") {
+            Leonni.ShowErrorMessage(data.errors);
+        }
+    }
+
+    $("#recoverPassword").click(function () {
+        if ($('#username').val() != "") {
+            $.ajax({
+                url: LeonniUrl("/Account/RecoverPassword"),
+                type: "POST",
+                data: "email=" + $('#username').val(),
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "success") {
+                        Leonni.ShowSuccessMessage(response.successMessage);
+
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errorMessage);
+                    }
+                }
+            });
+        }
+    });
+</script>

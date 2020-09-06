@@ -1,0 +1,15 @@
+﻿@model Leonni.Models.ViewModels.BaseViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@if (Request.IsAuthenticated)
+{
+    <div style="padding: 100px 0 0 0; text-align: center;">
+        <h1>
+            <b>Welcome<br />
+                <br />
+                to<br />
+                <br />
+                Leonni Admin</b></h1>
+    </div>
+}

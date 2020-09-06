@@ -1,0 +1,9 @@
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\Leonni.Models.dll.config
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\Leonni.Models.dll
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\Leonni.Models.pdb
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\Elmah.dll
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\EntityFramework.dll
+C:\LeonniSocial\Leonni\Leonni.Data\bin\Debug\EntityFramework.xml
+C:\LeonniSocial\Leonni\Leonni.Data\obj\Debug\ResolveAssemblyReference.cache
+C:\LeonniSocial\Leonni\Leonni.Data\obj\Debug\Leonni.Models.dll
+C:\LeonniSocial\Leonni\Leonni.Data\obj\Debug\Leonni.Models.pdb

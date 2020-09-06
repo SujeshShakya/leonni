@@ -1,0 +1,26 @@
+﻿@model Leonni.Models.ViewModels.FrontModel
+<div class="photo-frames" style="margin-top: 20px;">
+
+    @*<div class="frame" id="banner">
+    </div>*@
+    @if (Model.VideoListModel != null)
+    {
+        foreach (var objModel in Model.VideoListModel)
+        { 
+    <iframe width="150" height="120" src="@objModel.VideoLinkUrl" frameborder="0" allowfullscreen></iframe>
+        }
+    }
+    @*<div class="frame">
+    </div>*@
+    
+        
+    <div class="clear">
+    </div>
+    @if (Model.FrontEntityFileListModel != null)
+    {
+        foreach (var objModel in Model.FrontEntityFileListModel)
+        { 
+    <img src="@Url.Action("Picture", "File", new { id = objModel.FileId, width=150,height=120})" alt="" />
+        }
+    }
+</div>

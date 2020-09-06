@@ -1,0 +1,40 @@
+﻿@model Leonni.Models.ViewModels.FrontModel
+@if (Model.SectionListModel != null)
+{
+    foreach (var objModel in Model.SectionListModel)
+    { 
+    <div style="margin: 0">
+        @using (Html.BeginForm("FrontSection", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.ValidationSummary(true)
+            <div style="font-size: 14px;">
+                @Html.Hidden("sectionId", objModel.Id)
+                @objModel.SectionName</div>
+            <div class="field-2">
+                <div style="width: 230px; float: left;" class="field">
+                    <div style="margin-bottom: 10px;">@Html.TextBoxFor(model => model.VideoLinkModel.VideoLinkUrl, new { @placeholder = "YouTube Link" })</div>
+                    <div>
+                        <input type="file" name="BannerPic" /></div>
+                </div>
+                <div class="field">
+                    @Html.TextBoxFor(model => model.FileLink, new { @placeholder = "Photo Link" })
+                </div>
+                <div style="width: 120px; float: left;" class="blue-btn">
+                    <input type="submit" value="load" style="margin-left: 4px; padding: 3px 15px" />
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        }
+        <div id="FrontSearch">
+            @if (objModel.Id != null)
+            {
+                HttpContext.Current.Items["one"] = objModel.Id;
+                {
+                    Html.RenderAction("FrontSearch", "ControlPanel");
+                }
+            }
+        </div>
+    </div>
+    }
+}

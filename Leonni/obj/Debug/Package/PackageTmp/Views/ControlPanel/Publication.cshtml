@@ -1,0 +1,126 @@
+﻿@model PublicationModel
+@{
+    ViewBag.Title = "Publication";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/fileuploader.css" />
+<div id="content-wrapper">
+    <div class="user-page">
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        @using (Html.BeginForm("Publication", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x=>x.IsNew)
+            <div class="profile-btns">
+                <div class="blue-btn view-profile-btn">
+                    <input type="submit" value="Create Publication" /></div>
+                <div class="blue-btn update-btn">
+                    <a href="#">See Publication</a></div>
+            </div>
+            <div class="user-biodata">
+                <div class="field-1">
+                    <div style="width: 230px; float: left;" class="field">
+                        @Html.DropDownListFor(x => x.GroupId, Model.Groups)</div>
+                    <div style="width: 230px; float: left;" class="field">
+                        @Html.DropDownListFor(x => x.ProjectId, Model.Projects)</div>
+                </div>
+                <div class="clear">
+                </div>
+                <div class="field-2">
+                    <div style="width: 230px; float: left;" class="field">
+                        @Html.TextBoxFor(x => x.Title, new { placeholder = "Title" })
+                    </div>
+                    <div style="width: 230px; float: left;" class="field">
+                        @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @onchange = "GetDisciplines(this,'entry')" })</div>
+                    <div style="width: 230px; float: left;" class="field">
+                        @Html.DropDownListFor(x => x.DisciplineId, Model.Disciplines, new { @class = "Disciplines" })</div>
+                </div>
+                <div class="clear">
+                </div>
+                <div class="field-3" style="margin-bottom: 63px;">
+                    <div class="summary-field">
+                        @Html.TextBoxFor(x => x.Resume, new { placeholder = "Summarize publication in 120 characters" })
+                    </div>
+                    <div class="summary">
+                        @Html.TextAreaFor(x => x.Description, new { placeholder = "Write here the content    " })</div>
+                </div>
+                <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                    <noscript>
+                        <p>
+                            Please enable JavaScript to use file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                    </noscript>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="middle-hr">
+            </div>
+        }
+        <div class="middle-hr">
+        </div>
+        <div>
+            @{Html.RenderAction("PublicationSearch", "ControlPanel");}
+        </div>
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+<script type="text/javascript" src="~/Scripts/fileuploader.js"></script>
+<script src="~/Scripts/GlobalSearch.js" type="text/javascript"></script>
+<script type="text/javascript">
+    if ($("#user-list-partial").length > 0) {
+        List(currentPageNumber, takeNumber, "publications");
+    }
+    $(document).ready(function () {
+        $("#toggle").toggle(function () {
+            $(this).attr("value", "Read Contents");
+            $(".comments").show();
+            $("#contents").hide();
+        },
+    function () {
+        $(this).attr("value", "Read Comments");
+        $(".comments").hide();
+        $("#contents").show();
+    }
+  );
+    });
+</script>
+<script type="text/javascript">
+
+    var uploader = new qq.FileUploader({
+        element: document.getElementById('file-uploader'),
+        onSubmit: function (id, fileName, contentType, Content) {
+            // --- add postdata parameters
+            uploader.setParams({ selectedFileName: fileName, selectedContentType: contentType, Content: Content });
+        },
+        // validation    
+        // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
+        allowedExtensions: ['BMP', 'JPG', 'GIF', 'PNG', 'JPEG'],
+        // each file size limit in bytes
+        // this option isn't supported in all browsers
+        //sizeLimit: 200, // max size   
+        // minSizeLimit: 200, // min 
+        action: LeonniUrl("/ControlPanel/Upload/"),
+        onComplete: function (id, fileName, responseJSON) {
+            console.log(responseJSON);
+            //$("#banner").html("<img src='/content/images/guia.jpg' alt='' class=''/>");
+            //$("#banner").html("<img src='/en-US/File/Picture/"+ id +"?width=720&height=234' alt='' class=''/>");
+            //var url = LeonniUrl("File/Picture?id=" + responseJSON.id + "&width=720&height=234");
+            var url = "http://localhost:4443/en-US/File/Picture?id=" + responseJSON.id + "&width=720&height=234";
+
+            $("#banner").html("<img src = '" + url + "' alt='' class=''/>");
+
+            //        $(".resize").aeImageResize({ height: 135, width: 123 });
+            //        $(".resize").show();
+
+        }
+
+        //    success: function (data) {
+
+        //    }
+    });
+</script>

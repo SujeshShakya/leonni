@@ -1,0 +1,55 @@
+﻿        @model Leonni.Models.ViewModels.GroupSearchModel
+               
+               <div class="search">
+            <div class="search-field">
+                <input type="text" placeholder="Search" /></div>
+            <div class="blue-btn destacados">
+                <input type="button" value="Search" /></div>
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div style="margin: 10px 0">
+            34 groups found apply filters</div>
+        <div class="middle-hr">
+        </div>
+        <div class="pagination">
+            <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a>
+            <a href="#">9</a> <a href="#">10</a><a href="#">Next</a>
+        </div>
+        <div class="middle-hr">
+        </div>
+
+        @if (Model.GroupListModel != null)
+        {
+            foreach (var objModel in Model.GroupListModel)
+            { 
+        <div class="search-result">
+            <div class="search-image">
+                @*<a href="@Url.Action("ViewGroup", new { id = @objModel.Id  })">*@
+                <a href="@Url.Action("Groups", new { id = @objModel.Id  })">
+                @if(objModel.FileId != null)
+                {
+                    <img src="@Url.Action("Picture", "File", new { id = @objModel.FileId, width = 150, height = 120 })" alt="" />
+                }
+                else
+                {
+                    <img src="~/Images/thumb.jpg" style="width : 150px ; height : 120px" alt="" />
+                }                 
+                 </a>
+               </div>
+            <div class="search-content">
+                <a href="#" class="name">@objModel.Title</a><span>&nbsp;</span><a href="#" class="sub-name">@objModel.DisciplineName</a><br />
+                <br />
+                <a href="#" class="categories">@objModel.Summary</a></div>
+            <div class="clear">
+            </div>
+        </div>
+            }
+        }
+
+        <div class="pagination">
+            <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a>
+            <a href="#">9</a> <a href="#">10</a><a href="#">Next</a>
+        </div>

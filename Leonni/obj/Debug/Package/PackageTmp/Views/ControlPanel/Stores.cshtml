@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Stores";
+}
+<div id="content-wrapper">
+    <div class="user-page">
+        @*<div id="bread-crumb"><a href="javascript:void(0)" class="bread-initial">Control Panel</a>&gt;<a href="javascript:void(0)" class="bread-follow">Profile</a></div>*@
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        <div class="profile-btns">
+            <div class="blue-btn view-profile-btn">
+                <a href="~/ControlPanel/ViewProfile">Create Publication</a></div>
+            <div class="blue-btn update-btn">
+                <a href="#">See Publication</a></div>
+        </div>
+        <div class="user-biodata">
+            <div class="field-1">
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option>associate group</option>
+                    </select></div>
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option>associate project</option>
+                    </select></div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="field-2">
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option>title</option>
+                    </select></div>
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option>category</option>
+                    </select></div>
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option>discipline</option>
+                    </select></div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="field-3" style="margin-bottom: 63px;">
+                <div class="summary-field">
+                    <input type="text" value="" /></div>
+                <div class="summary">
+                    <textarea rows="" cols="" name=""></textarea></div>
+                <div class="field" style="margin-bottom: 20px">
+                    <input type="text" value="photo"></div>
+                <div class="clear">
+                </div>
+                <div class="red-btn" style="width: 120px; float: left;">
+                    <input type="button" value="remove" /></div>
+                <div class="blue-btn" style="width: 120px; float: left;">
+                    <input type="button" value="disable" /></div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div class="search">
+            <div class="search-field" style="margin: 15px 0;">
+                <input type="text" placeholder="Search" /></div>
+            <div class="blue-btn destacados" style="margin-bottom: 15px;">
+                <input type="button" value="Search" /></div>
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div style="margin: 15px 0;">
+            <div class="search-found">
+                4 publication found<span class="blue-link" style="margin-left: 20px"><a href="#">Apply
+                    filters</a></span></div>
+            <div class="middle-hr">
+            </div>
+            <div class="pagination">
+                <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a>
+                <a href="#">9</a> <a href="#">10</a><a href="#">Next</a>
+            </div>
+            <div class="middle-hr">
+            </div>
+            <div class="search-result">
+                <div style="margin-bottom: 20px;">
+                    <span class="blue-link"><a href="#">publication title</a></span><br>
+                    <span class="gray-link"><a href="#">summary</a></span></div>
+                <div class="search-content">
+                    <a href="#" class="name">category</a><span>|</span><a href="#" class="sub-name">diciplina
+                        12/10/2012</a></div>
+                <div class="clear">
+                </div>
+            </div>
+            <div style="background: #fbfbfb; height: 100px; border: 1px solid #666665; border-left: none;
+                border-right: none;">
+            </div>
+            <div class="pagination">
+                <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a>
+                <a href="#">9</a> <a href="#">10</a><a href="#">Next</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}

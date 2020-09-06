@@ -1,0 +1,54 @@
+﻿@model PageContentModel
+@{
+    ViewBag.Title = "Create";
+}
+<h2 class="txt">
+    Create Page Content</h2>
+@using (Html.BeginForm("Create", "PageContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true);
+                                 
+    <div class="form_col">
+        <label class="firstchild">
+            Language:</label>
+        @Html.DropDownListFor(x => x.LanguageId, (SelectList)ViewBag.Languages, new { id = "cursorFocus1" }) *
+    </div>                                                                 
+    <div class="form_col">
+        <label class="firstchild">
+            Page Url:</label>
+        @Html.TextBoxFor(x => x.PageUrl) *
+        @Html.ValidationMessageFor(x => x.PageUrl)
+    </div>  
+    <div class="form_col">
+        <label class="firstchild">
+            Page Name:</label>
+        @Html.TextBoxFor(x => x.PageName) *
+        @Html.ValidationMessageFor(x => x.PageName)
+    </div>      
+    <div class="form_col">
+        <label class="firstchild">
+            Page Content:</label>
+        <input type="file" name="upload" /> *
+                @Html.ValidationMessageFor(x => x.FileType)
+                @Html.ValidationMessageFor(x => x.Content)
+    </div>  
+    <div class="form_col">
+    <label class="firstchild">
+            &nbsp</label>
+        <span style="color: Red">Note: Field Marked with * is Mandatory </span>
+    </div>
+              
+    <div class="but_wrap">
+        <div class="lft_but">
+            <span class="input_button1 but_orange">
+                <input type="submit" value="Save" name="submitBtn" />
+            </span>
+        </div>
+        <div class="lft_but">
+            <span class="input_button1 but_orange">
+                <input type="button" value="Cancel" id="CancelBtn" />
+            </span>
+        </div>
+    </div>
+    
+}

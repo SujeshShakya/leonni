@@ -1,0 +1,245 @@
+﻿-@model AdvertisementModel
+@{
+    ViewBag.Title = "Advertising";
+}
+<link href="~/Content/ui.dropdownchecklist.standalone.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/ui.dropdownchecklist.themeroller.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="~/Content/fileuploader.css" />
+<div id="content-wrapper">
+    <div class="user-page">
+        @*<div id="bread-crumb"><a href="javascript:void(0)" class="bread-initial">Control Panel</a>&gt;<a href="javascript:void(0)" class="bread-follow">Profile</a></div>*@
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        <div class="profile-btns">
+            <div class="blue-btn view-profile-btn">
+                <a href="~/ControlPanel/ViewProfile">update</a></div>
+            <div class="blue-btn update-btn" style="width: 122px; float: left;">
+                <a href="#">view post</a></div>
+            <div class="blue-btn update-btn">
+                <a href="#">disable</a></div>
+        </div>
+        <div class="user-biodata">
+            <div class="field-1">
+                <div class="field">
+                    @Html.TextBoxFor(x => x.Title, new { placeholder = "Title" })
+                    @Html.ValidationMessageFor(x => x.Title)
+                </div>
+                <div class="field" style="width: 400px;">
+                    @Html.TextBoxFor(x => x.Link, new { placeholder = "Link to the website" })</div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="field-2">
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.DropDownListFor(x => x.EngineeredTo, (SelectList)ViewBag.Engineered)</div>
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @onchange = "GetDisciplines()" })</div>
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.DropDownListFor(x => x.DisciplineId, Model.Disciplines, new { id = "Disciplines" })</div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="field-2">
+                <div style="width: 230px; float: left;" class="field">
+                    <select name="">
+                        <option value="0">Sex</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select></div>
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.DropDownListFor(x => x.CountryName, Model.Countries, new { @onchange = "GetProvinces()" })</div>
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.DropDownListFor(x => x.ProvinceId, Model.Provinces, new { id = "Provinces" })</div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="field-2">
+                <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                    <noscript>
+                        <p>
+                            Please enable JavaScript to use file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                    </noscript>
+                </div>
+                <div style="width: 230px; float: left;">
+                    @Html.DropDownListFor(x => x.SectionId, (SelectList)ViewBag.Sections, new { id = "checkSections", @multiple = "multiple", @selected = "selected"})</div>
+                <div style="width: 230px; float: left;" class="field">
+                    @Html.TextBoxFor(x => x.BeginningDay)
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+            <div style="background: #d3f2b6; width: 720px; height: 234px; margin-bottom: 20px;"
+                id="banner">
+            </div>
+            <div class="field-3" style="margin-bottom: 63px;">
+                <form action="@Url.Action("PaymentForm", "paypal")" method="post">
+                <div class="field">
+                    <input type="text" value="" id="clickCount" name="clickCount" /></div>
+                <div style="float: left;">
+                    x 0.5 &euro; clic = 646.06 &euro;</div>
+                <div class="blue-btn" style="float: right;">
+                    <input type="submit" id="payWithPaypal" style="padding: 5px 6px;" value="Pay with PayPal" /></div>
+                </form>
+            </div>
+            <div class="chk">
+                <div class="chk-box">
+                    <input type="checkbox" value="" name=""></div>
+                <div class="chk-list">
+                    Accept the Terms of Contract</div>
+            </div>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 20px">
+            <tr>
+                <td>
+                    Title
+                </td>
+                <td>
+                    10/12/2012
+                </td>
+                <td>
+                    Purchased 34 of 6500 clicks
+                </td>
+                <td>
+                    155
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Title
+                </td>
+                <td>
+                    10/12/2012
+                </td>
+                <td>
+                    Purchased 34 of 6500 clicks
+                </td>
+                <td>
+                    155
+                </td>
+            </tr>
+        </table>
+        <div class="clear">
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div class="search">
+            <div class="search-field" style="margin: 15px 0; width: 814px; float: left;">
+                <input type="text" placeholder="Search" /></div>
+            <div class="blue-btn destacados" style="margin:15px 0 0 10px; width: 80px; float: left;">
+                <input type="button" value="Search" /></div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div style="margin: 15px 0;">
+            <div class="search-found">
+                4 publication found<span class="blue-link" style="margin-left: 20px"><a href="#">Apply
+                    filters</a></span></div>
+            <div class="middle-hr">
+            </div>
+            <div class="pagination">
+                <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a
+                    href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a>
+                <a href="#">9</a> <a href="#">10</a><a href="#">Next</a>
+            </div>
+            <div class="middle-hr">
+            </div>
+            <div class="search-result">
+                <div class="search-image">
+                    <img src="img/thumb.jpg" alt="" /></div>
+                <div class="search-content">
+                    <a href="#" class="name">Seccion tiutiol</a><span>|</span><a href="#" class="sub-name">Resumen</a><span>|</span><a
+                        href="#" class="categories">Categoria Disciplina</a></div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+@section Scripts{
+    <script src="~/Scripts/ui.dropdownchecklist-1.4-min.js" type="text/javascript"></script>
+    <script src="~/Scripts/PopulateDropDowns.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Scripts/fileuploader.js"></script>
+    <script type="text/javascript">
+
+        $("#checkSections").dropdownchecklist({ firstItemChecksAll: true, forceMultiple: true
+    , textFormatFunction: function (options) {
+        //        var selectedOptions = options.filter(":selected");
+        //        for (var i = 0; i < selectedOptions.length; i++) {
+        //            arrDegree.push(selectedOptions[i].value);
+        //        }
+        //        $(".lstDegree").val(arrDegree.toString());
+    },
+            width: '193',
+            height: '18'
+        });
+
+        $('#BeginningDay').datepicker({
+            dateFormat: "mm/dd/yy",
+            showOn: "button",
+            buttonImage: LeonniUrl("/Images/cal_btn.jpg"),
+            buttonImageOnly: true
+        });
+
+
+        var uploader = new qq.FileUploader({
+            element: document.getElementById('file-uploader'),
+            onSubmit: function (id, fileName, contentType, Content) {
+                // --- add postdata parameters
+                uploader.setParams({ selectedFileName: fileName, selectedContentType: contentType, Content: Content });
+            },
+            // validation    
+            // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
+            allowedExtensions: ['BMP', 'JPG', 'GIF', 'PNG', 'JPEG'],
+            // each file size limit in bytes
+            // this option isn't supported in all browsers
+            //sizeLimit: 200, // max size   
+            // minSizeLimit: 200, // min 
+            action: LeonniUrl("/ControlPanel/Upload/"),
+            onComplete: function (id, fileName, responseJSON) {
+                console.log(responseJSON);
+                //$("#banner").html("<img src='/content/images/guia.jpg' alt='' class=''/>");
+                //$("#banner").html("<img src='/en-US/File/Picture/"+ id +"?width=720&height=234' alt='' class=''/>");
+                //var url = LeonniUrl("File/Picture?id=" + responseJSON.id + "&width=720&height=234");
+                var url = "http://localhost:4443/en-US/File/Picture?id=" + responseJSON.id + "&width=720&height=234";
+             
+                $("#banner").html("<img src = '" + url + "' alt='' class=''/>");
+
+                //        $(".resize").aeImageResize({ height: 135, width: 123 });
+                //        $(".resize").show();
+
+            }
+
+            //    success: function (data) {
+
+            //    }
+        });
+
+    </script>
+    @* <script type="text/javascript">
+        $(function () {
+            $('#payWithPaypal').click(function (e) {
+                e.preventDefault();
+                var clickCount = $('#clickCount').val();
+                $.ajax({
+                    url: LeonniUrl('paypal/PaymentForm'),
+                    data: { 'clickCount': clickCount },
+                    dataType: 'json',
+                    type: 'POST'
+                }).done(function (response) {
+                    console.log(response);
+                });
+            });
+        });
+    </script>*@
+}

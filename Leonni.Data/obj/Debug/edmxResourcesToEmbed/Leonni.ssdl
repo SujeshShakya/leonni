@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeonniModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="LeonniModelStoreContainer">
+    <EntitySet Name="Activities" EntityType="LeonniModel.Store.Activities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Advertisements" EntityType="LeonniModel.Store.Advertisements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Articles" EntityType="LeonniModel.Store.Articles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="LeonniModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoryDisciplines" EntityType="LeonniModel.Store.CategoryDisciplines" store:Type="Tables" store:Schema="dbo" store:Name="CategoryDisciplines">
+      <DefiningQuery>SELECT 
+      [CategoryDisciplines].[CategoryId] AS [CategoryId], 
+      [CategoryDisciplines].[DisciplineId] AS [DisciplineId]
+      FROM [dbo].[CategoryDisciplines] AS [CategoryDisciplines]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Comments" EntityType="LeonniModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommentThreads" EntityType="LeonniModel.Store.CommentThreads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Countries" EntityType="LeonniModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Disciplines" EntityType="LeonniModel.Store.Disciplines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EntityFiles" EntityType="LeonniModel.Store.EntityFiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Favourites" EntityType="LeonniModel.Store.Favourites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Files" EntityType="LeonniModel.Store.Files" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FrontContents" EntityType="LeonniModel.Store.FrontContents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FrontEntityFiles" EntityType="LeonniModel.Store.FrontEntityFiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Galleries" EntityType="LeonniModel.Store.Galleries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="LeonniModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="LanguageGroups" EntityType="LeonniModel.Store.LanguageGroups" store:Type="Tables" store:Schema="dbo" store:Name="LanguageGroups">
+      <DefiningQuery>SELECT 
+      [LanguageGroups].[LanguageGroupId] AS [LanguageGroupId], 
+      [LanguageGroups].[LanguageGroupName] AS [LanguageGroupName], 
+      [LanguageGroups].[LanguageSupported] AS [LanguageSupported]
+      FROM [dbo].[LanguageGroups] AS [LanguageGroups]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Languages" EntityType="LeonniModel.Store.Languages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Likes" EntityType="LeonniModel.Store.Likes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Links" EntityType="LeonniModel.Store.Links" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="LeonniModel.Store.Messages" store:Type="Tables" store:Schema="dbo" store:Name="Messages">
+      <DefiningQuery>SELECT 
+      [Messages].[Id] AS [Id], 
+      [Messages].[SentTo] AS [SentTo], 
+      [Messages].[SentDate] AS [SentDate], 
+      [Messages].[SentBy] AS [SentBy], 
+      [Messages].[MessageContent] AS [MessageContent]
+      FROM [dbo].[Messages] AS [Messages]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Months" EntityType="LeonniModel.Store.Months" store:Type="Tables" store:Schema="dbo" store:Name="Months">
+      <DefiningQuery>SELECT 
+      [Months].[Id] AS [Id], 
+      [Months].[LanguageId] AS [LanguageId], 
+      [Months].[MonthName] AS [MonthName]
+      FROM [dbo].[Months] AS [Months]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="PageContents" EntityType="LeonniModel.Store.PageContents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pages" EntityType="LeonniModel.Store.Pages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="LeonniModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Provinces" EntityType="LeonniModel.Store.Provinces" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Publications" EntityType="LeonniModel.Store.Publications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sections" EntityType="LeonniModel.Store.Sections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Translations" EntityType="LeonniModel.Store.Translations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProfiles" EntityType="LeonniModel.Store.UserProfiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VideoLinks" EntityType="LeonniModel.Store.VideoLinks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Years" EntityType="LeonniModel.Store.Years" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Activities_Categories" Association="LeonniModel.Store.FK_Activities_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Activities" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activities_Disciplines" Association="LeonniModel.Store.FK_Activities_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Activities" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activities_Groups" Association="LeonniModel.Store.FK_Activities_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Activities" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activities_Projects" Association="LeonniModel.Store.FK_Activities_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Activities" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articles_Categories" Association="LeonniModel.Store.FK_Articles_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Articles" EntitySet="Articles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryDiscipline_Categories" Association="LeonniModel.Store.FK_CategoryDiscipline_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="CategoryDisciplines" EntitySet="CategoryDisciplines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryDiscipline_Discipline" Association="LeonniModel.Store.FK_CategoryDiscipline_Discipline">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="CategoryDisciplines" EntitySet="CategoryDisciplines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EntityFiles_Sections" Association="LeonniModel.Store.FK_EntityFiles_Sections">
+      <End Role="Sections" EntitySet="Sections" />
+      <End Role="EntityFiles" EntitySet="EntityFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Favourites_Sections" Association="LeonniModel.Store.FK_Favourites_Sections">
+      <End Role="Sections" EntitySet="Sections" />
+      <End Role="Favourites" EntitySet="Favourites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Galleries_Disciplines" Association="LeonniModel.Store.FK_Galleries_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Galleries" EntitySet="Galleries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Galleries_Groups" Association="LeonniModel.Store.FK_Galleries_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Galleries" EntitySet="Galleries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Galleries_Projects" Association="LeonniModel.Store.FK_Galleries_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Galleries" EntitySet="Galleries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_Disciplines" Association="LeonniModel.Store.FK_Groups_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Links_Categories" Association="LeonniModel.Store.FK_Links_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Links" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Links_Disciplines" Association="LeonniModel.Store.FK_Links_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Links" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Links_Projects" Association="LeonniModel.Store.FK_Links_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Links" EntitySet="Links" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PageContents_Languages" Association="LeonniModel.Store.FK_PageContents_Languages">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="PageContents" EntitySet="PageContents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projects_Categories" Association="LeonniModel.Store.FK_Projects_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projects_Projects" Association="LeonniModel.Store.FK_Projects_Projects">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Publication_Projects" Association="LeonniModel.Store.FK_Publication_Projects">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Publications" EntitySet="Publications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Publications_Categories" Association="LeonniModel.Store.FK_Publications_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Publications" EntitySet="Publications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Publications_Disciplines" Association="LeonniModel.Store.FK_Publications_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="Publications" EntitySet="Publications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sections_Languages" Association="LeonniModel.Store.FK_Sections_Languages">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Sections" EntitySet="Sections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Translations_Languages" Association="LeonniModel.Store.FK_Translations_Languages">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="Translations" EntitySet="Translations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfiles_Categories" Association="LeonniModel.Store.FK_UserProfiles_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfiles_Disciplines" Association="LeonniModel.Store.FK_UserProfiles_Disciplines">
+      <End Role="Disciplines" EntitySet="Disciplines" />
+      <End Role="UserProfiles" EntitySet="UserProfiles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" />
+    <Property Name="ProjectId" Type="bigint" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Resume" Type="varchar" Nullable="false" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="Locality" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Price" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="DeletedBy" Type="bigint" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="IsDisabled" Type="bit" />
+    <Property Name="DisabledBy" Type="bigint" />
+    <Property Name="DeletedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Advertisements">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Link" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Sex" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="BeginningDay" Type="datetime" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="UserProfileId" Type="int" Nullable="false" />
+    <Property Name="EngineeredTo" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Articles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Resume" Type="varchar" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Location" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="50" />
+    <Property Name="PageId" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Leonni.dbo.CategoryDisciplines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="CategoryDisciplines">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+      <PropertyRef Name="DisciplineId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Body" Type="varchar(max)" Nullable="false" />
+    <Property Name="ThreadID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="ProfileId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="CommentThreads">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="URL" Type="nvarchar" MaxLength="500" />
+    <Property Name="SectionId" Type="int" />
+    <Property Name="EntityID" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Disciplines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EntityFiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SectionId" Type="int" />
+    <Property Name="EntityId" Type="bigint" />
+    <Property Name="FileId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Favourites">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="SectionId" Type="int" Nullable="false" />
+    <Property Name="EntityId" Type="bigint" Nullable="false" />
+    <Property Name="UserProfileId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Files">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FileName" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="ContentType" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="Content" Type="varbinary(max)" />
+    <Property Name="Link" Type="varchar" MaxLength="500" />
+    <Property Name="Height" Type="int" />
+    <Property Name="Width" Type="int" />
+  </EntityType>
+  <EntityType Name="FrontContents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SectionId" Type="bigint" Nullable="false" />
+    <Property Name="ContentId" Type="bigint" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FrontEntityFiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SectionId" Type="bigint" Nullable="false" />
+    <Property Name="EntityId" Type="bigint" Nullable="false" />
+    <Property Name="FileId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Galleries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" />
+    <Property Name="ProjectId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Resume" Type="varchar" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="IsVisible" Type="bit" Nullable="false" />
+    <Property Name="IsCloseIncome" Type="bit" Nullable="false" />
+    <Property Name="AllowContents" Type="bit" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Summary" Type="varchar" MaxLength="120" />
+    <Property Name="Text" Type="varchar(max)" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Leonni.dbo.LanguageGroups' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="LanguageGroups">
+    <Key>
+      <PropertyRef Name="LanguageGroupId" />
+      <PropertyRef Name="LanguageGroupName" />
+    </Key>
+    <Property Name="LanguageGroupId" Type="int" Nullable="false" />
+    <Property Name="LanguageGroupName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LanguageSupported" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LanguageCode" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="LanguageDirection" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EntityId" Type="bigint" />
+    <Property Name="EntityName" Type="varchar" MaxLength="50" />
+    <Property Name="ProfileId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Links">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="ProjectId" Type="bigint" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Resume" Type="varchar" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Leonni.dbo.Messages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="SentTo" />
+      <PropertyRef Name="SentDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SentTo" Type="bigint" Nullable="false" />
+    <Property Name="SentDate" Type="datetime" Nullable="false" />
+    <Property Name="SentBy" Type="bigint" />
+    <Property Name="MessageContent" Type="varchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'Leonni.dbo.Months' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Months">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="LanguageId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="MonthName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PageContents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" />
+    <Property Name="PageUrl" Type="nvarchar" MaxLength="100" />
+    <Property Name="PageName" Type="varchar" MaxLength="50" />
+    <Property Name="Content" Type="ntext" />
+    <Property Name="HyperLinkText" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsMarketingPage" Type="bit" />
+    <Property Name="SortKey" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Pages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PageName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="Cost" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Inversion" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Resume" Type="varchar" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Link" Type="varchar" MaxLength="500" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="IsDisabled" Type="bit" />
+    <Property Name="DeletedBy" Type="bigint" />
+    <Property Name="DisabledBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6005: The data type 'geography' is not supported for the target .NET Framework version. The column 'geom' in the table 'Leonni.dbo.Provinces' was excluded from the model. To use the data type 'geography', target the .NET Framework 4.5 or higher.
+      -->
+  <EntityType Name="Provinces">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="OBJECTID" Type="bigint" />
+    <Property Name="VertexCou" Type="real" />
+    <Property Name="ISO" Type="nvarchar" MaxLength="255" />
+    <Property Name="Country" Type="nvarchar" MaxLength="255" />
+    <Property Name="NAME_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="VARNAME_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="NL_NAME_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="HASC_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="TYPE_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="ENGTYPE_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="VALIDFR_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="VALIDTO_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="REMARKS_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="Region" Type="nvarchar" MaxLength="255" />
+    <Property Name="RegionVar" Type="nvarchar" MaxLength="255" />
+    <Property Name="ProvNumber" Type="int" />
+    <Property Name="NEV_Countr" Type="nvarchar" MaxLength="255" />
+    <Property Name="FIRST_FIPS" Type="nvarchar" MaxLength="255" />
+    <Property Name="FIRST_HASC" Type="nvarchar" MaxLength="255" />
+    <Property Name="FIPS_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="gadm_level" Type="real" />
+    <Property Name="CheckMe" Type="int" />
+    <Property Name="Region_Cod" Type="nvarchar" MaxLength="255" />
+    <Property Name="Region_C_1" Type="nvarchar" MaxLength="255" />
+    <Property Name="ScaleRank" Type="int" />
+    <Property Name="Region_C_2" Type="nvarchar" MaxLength="255" />
+    <Property Name="Region_C_3" Type="nvarchar" MaxLength="255" />
+    <Property Name="Country_Pr" Type="nvarchar" MaxLength="255" />
+    <Property Name="Shape_Leng" Type="real" />
+    <Property Name="Shape_Area" Type="real" />
+  </EntityType>
+  <EntityType Name="Publications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupId" Type="bigint" Nullable="false" />
+    <Property Name="ProjectId" Type="bigint" Nullable="false" />
+    <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Resume" Type="varchar" MaxLength="120" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="PhotoId" Type="bigint" />
+    <Property Name="DeletedBy" Type="bigint" />
+    <Property Name="DisabledBy" Type="bigint" />
+    <Property Name="DeletedDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sections">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SectionName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Translations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="Classification" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="Key" Type="varchar" Nullable="false" MaxLength="5000" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PageUrl" Type="varchar" Nullable="false" />
+    <Property Name="GroupName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserProfiles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SurName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="DisciplineId" Type="int" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Occupation" Type="varchar" MaxLength="50" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Sex" Type="varchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="WebLink" Type="varchar" MaxLength="50" />
+    <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="Locality" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="ZipCode" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsLeonniTeam" Type="bit" Nullable="false" />
+    <Property Name="LikesCount" Type="bigint" />
+    <Property Name="CommentsCount" Type="bigint" />
+    <Property Name="StatusId" Type="int" Nullable="false" />
+    <Property Name="VisitorsCount" Type="bigint" />
+  </EntityType>
+  <EntityType Name="VideoLinks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="VideoLinkUrl" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="SectionId" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Years">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="YearName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Activities_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="Activities" Type="LeonniModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activities">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activities_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Activities" Type="LeonniModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activities">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activities_Groups">
+    <End Role="Groups" Type="LeonniModel.Store.Groups" Multiplicity="1" />
+    <End Role="Activities" Type="LeonniModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activities">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activities_Projects">
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="1" />
+    <End Role="Activities" Type="LeonniModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activities">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articles_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="Articles" Type="LeonniModel.Store.Articles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Articles">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryDiscipline_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="CategoryDisciplines" Type="LeonniModel.Store.CategoryDisciplines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoryDisciplines">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryDiscipline_Discipline">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="CategoryDisciplines" Type="LeonniModel.Store.CategoryDisciplines" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoryDisciplines">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EntityFiles_Sections">
+    <End Role="Sections" Type="LeonniModel.Store.Sections" Multiplicity="0..1" />
+    <End Role="EntityFiles" Type="LeonniModel.Store.EntityFiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EntityFiles">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Favourites_Sections">
+    <End Role="Sections" Type="LeonniModel.Store.Sections" Multiplicity="1" />
+    <End Role="Favourites" Type="LeonniModel.Store.Favourites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sections">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Favourites">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Galleries_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Galleries" Type="LeonniModel.Store.Galleries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Galleries">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Galleries_Groups">
+    <End Role="Groups" Type="LeonniModel.Store.Groups" Multiplicity="1" />
+    <End Role="Galleries" Type="LeonniModel.Store.Galleries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Galleries">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Galleries_Projects">
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="1" />
+    <End Role="Galleries" Type="LeonniModel.Store.Galleries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Galleries">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Groups" Type="LeonniModel.Store.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Links_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="Links" Type="LeonniModel.Store.Links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Links">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Links_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Links" Type="LeonniModel.Store.Links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Links">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Links_Projects">
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="1" />
+    <End Role="Links" Type="LeonniModel.Store.Links" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Links">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PageContents_Languages">
+    <End Role="Languages" Type="LeonniModel.Store.Languages" Multiplicity="0..1" />
+    <End Role="PageContents" Type="LeonniModel.Store.PageContents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PageContents">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projects_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Projects_Projects">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Publication_Projects">
+    <End Role="Projects" Type="LeonniModel.Store.Projects" Multiplicity="1" />
+    <End Role="Publications" Type="LeonniModel.Store.Publications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Publications">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Publications_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="Publications" Type="LeonniModel.Store.Publications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Publications">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Publications_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="Publications" Type="LeonniModel.Store.Publications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Publications">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sections_Languages">
+    <End Role="Languages" Type="LeonniModel.Store.Languages" Multiplicity="1" />
+    <End Role="Sections" Type="LeonniModel.Store.Sections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sections">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Translations_Languages">
+    <End Role="Languages" Type="LeonniModel.Store.Languages" Multiplicity="1" />
+    <End Role="Translations" Type="LeonniModel.Store.Translations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Translations">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfiles_Categories">
+    <End Role="Categories" Type="LeonniModel.Store.Categories" Multiplicity="1" />
+    <End Role="UserProfiles" Type="LeonniModel.Store.UserProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfiles">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfiles_Disciplines">
+    <End Role="Disciplines" Type="LeonniModel.Store.Disciplines" Multiplicity="1" />
+    <End Role="UserProfiles" Type="LeonniModel.Store.UserProfiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplines">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProfiles">
+        <PropertyRef Name="DisciplineId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

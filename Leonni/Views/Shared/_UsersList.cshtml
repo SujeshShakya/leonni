@@ -1,0 +1,74 @@
+﻿@{List<UserProfileModel> lstUsersList = ViewBag.PagedListofUsers;}
+<div style="margin: 10px 0">
+    @ViewBag.TotalUserCount entries found
+</div>
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{int pageItems = 0;
+      int i = 0;
+
+      while (pageItems < ViewBag.TotalUserCount)
+      {
+          pageItems += 100;
+          i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+      }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>
+@if (lstUsersList != null)
+{
+    foreach (UserProfileModel item in lstUsersList)
+    {
+    <div class="search-result" id="@item.Id">
+        <div style="width: 700px;">
+            <div class="search-image">
+                <a href="#" onClick="EditProfile('@item.Id')">
+                    <img src="@Url.Action("Picture", "File", new { id = item.FileId, width = 150, height = 200 })" alt="" />
+                </a>
+            </div>
+            <a href="#" class="name">@item.CountryName</a><a href="#" class="sub-name" onClick="EditProfile('@item.Id')">@item.FirstName</a><br />
+            <span>@item.Summary</span>
+            <div class="clear">
+            </div>
+            <div style="margin-top: 15px;">
+                <div class="search-content" style="width: 400px; float: left">
+                    <a href="#" class="categories">@item.Category.CategoryName &nbsp &nbsp @item.Discipline.DisciplineName</a>
+                </div>
+                <div class="user-options-icons">
+                    <div class="group">
+                        <img src="/images/visitors.jpg" alt="G" /></div>
+                    <div class="number">
+                        23</div>
+                    <div class="bookmark">
+                        <img src="/images/Likes.jpg" alt="B" /></div>
+                    <div class="number">
+                        23</div>
+                    <div class="comment">
+                        <img src="/images/Comments.jpg" alt="C" /></div>
+                    <div class="number">
+                        23</div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    }
+}
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{ pageItems = 0;
+       i = 0;
+
+       while (pageItems < ViewBag.TotalUserCount)
+       {
+           pageItems += 100;
+           i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+       }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>

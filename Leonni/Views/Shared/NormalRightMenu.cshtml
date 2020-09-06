@@ -1,0 +1,59 @@
+﻿@model BaseViewModel
+<div class="right-hr">
+</div>
+@if (Request.IsAuthenticated)
+{
+                   
+    <p>
+        <ul>
+            <li><a href="javascript:void(0);">@User.Identity.Name</a> </li>
+            <li>
+                @Html.ActionLink("Log Out", "LogOff", "Account")
+            </li>
+        </ul>
+        @*@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Change password" })!*@
+    </p>
+
+    <div class="right-hr">
+    </div>
+    <div class="right-lists">
+        <ul>
+            <li>
+                <div class="head">@Html.Translate("ControlGroup", "ControlPanel")</div>
+            </li>
+            <li><a href="~/ControlPanel/Profile">@Html.Translate("ControlGroup", "Profile")</a></li>
+            <li><a href="~/ControlPanel/Configuration">@Html.Translate("ControlGroup", "Configuration")</a></li>
+            <div class="right-hr">
+            </div>
+            <li><a href="~/ControlPanel/Groups">@Html.Translate("ControlGroup", "Groups")</a></li>
+            <li><a href="~/ControlPanel/Publication">@Html.Translate("ControlGroup", "Publications")</a></li>
+            <li><a href="~/ControlPanel/Links">@Html.Translate("ControlGroup", "Links")</a></li>
+            <li><a href="~/ControlPanel/Activities">@Html.Translate("ControlGroup", "Activities")</a></li>
+            <li><a href="~/ControlPanel/Galleries">@Html.Translate("ControlGroup", "Galleries")</a></li>
+            <li><a href="~/ControlPanel/Stores">@Html.Translate("ControlGroup", "Stores")</a></li>
+            <li><a href="~/ControlPanel/Guide">@Html.Translate("ControlGroup", "Guide")</a></li>
+            <li><a href="~/ControlPanel/Features">@Html.Translate("ControlGroup", "Features")</a></li>
+            <li><a href="~/ControlPanel/Newsletters">@Html.Translate("ControlGroup", "Newsletters")</a></li>
+            <li><a href="~/ControlPanel/Advertisement">@Html.Translate("ControlGroup", "Advertising")</a></li>
+            <li><a href="~/ControlPanel/ChangePassword">@Html.Translate("ControlGroup", "Change Password")</a></li>
+            <div class="right-hr">
+            </div>
+            @if (Model.IsLeonniTeam)
+            { 
+                <li><a href="~/ControlPanel/Project">@Html.Translate("ControlGroup", "Project")</a></li>
+            }
+            <div class="right-hr">
+            </div>
+            @if (Model.CurrentRole == "Administrator")
+            { 
+                <li><a href="~/ControlPanel/Front">@Html.Translate("ControlGroup", "Front")</a></li>
+                <li><a href="~/Language/Index">@Html.Translate("ControlGroup", "Language")</a></li>
+                <li><a href="~/Translation/Index">@Html.Translate("ControlGroup", "Translation")</a></li>
+                <li><a href="~/ControlPanel/ApproveUsers">@Html.Translate("ControlGroup", "Approve/Disapprove Users")</a></li>
+            }
+            <div class="right-hr">
+            </div>
+        </ul>
+    </div>
+
+}

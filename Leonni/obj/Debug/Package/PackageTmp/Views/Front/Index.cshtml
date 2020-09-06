@@ -1,0 +1,36 @@
+﻿@model Leonni.Models.ViewModels.HomeIndexModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="content-wrapper">
+    <div class="middle-hr">
+    </div>
+    <div id="banner">
+        <img onclick="GoToUrl(@Model.)" src="@Url.Action("Picture", "File", new { id = Model.AdvertisingBanner, width = 720, height = 234 })" alt="" />
+    </div>
+    <div id="youtube-container">
+        <iframe width="720" height="450" src="@Model.VideoUrl" frameborder="0" allowfullscreen>
+        </iframe>
+    </div>
+    <div id="image-showcase">
+        @if (Model.BannerList != null)
+        {
+            foreach (var objModel in Model.BannerList)
+            { 
+            <img src="@Url.Action("Picture", "File", new { id = objModel.FileId, width = 720    , height = 234 })" alt="" /><br />
+            }
+        }
+    </div>
+</div>
+
+@{Html.RenderAction("FrontSearch", "Front");}
+
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+
+@section Scripts{
+    <script src="~/Scripts/Front.js" type="text/javascript"></script>
+}

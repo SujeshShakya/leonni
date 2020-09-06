@@ -1,0 +1,27 @@
+﻿@model GroupModel
+
+<div class="middle-hr">
+</div>
+  <ul class="group-content">
+            <li><a href="/Controlpanel/Publication">Create a Post</a></li>
+            <li><a href="/Controlpanel/Activity">Create an Activity</a></li>
+            <li><a href="/Controlpanel/Gallery">Create a Gallery</a></li>
+        </ul>
+        
+
+<div class="clear"></div>
+<div class="search">
+    <div class="search-field">
+        @Html.TextBoxFor(x => x.Title, new { placeholder = "Search", @class = "groupTitle", title="Search Group" })</div>
+    <div class="blue-btn destacados">
+        <input type="button" value="Search" class="groupSearch" /></div>
+</div>
+<div class="middle-hr">
+</div>
+<div style="margin: 10px 0">
+    <a href="javascript:void(0)" id="showFilters">Apply Filters </a>
+</div>
+<div id="searchfilters-partial"></div>
+<div id="user-list-partial">
+    Loading user list..
+</div>

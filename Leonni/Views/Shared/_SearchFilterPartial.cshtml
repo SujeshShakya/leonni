@@ -1,0 +1,42 @@
+﻿ @model ProfileSearchModel
+
+@*    <div class="search">
+        <div class="search-field">
+            @Html.TextBoxFor(x => x.FirstName, new { placeholder = "Search", @class = "name" })</div>
+        <div class="blue-btn destacados">
+            <input type="button" value="Search" class="NameSearch" }/></div>
+    </div>*@
+    <div class="middle-hr">
+    </div>
+    <div style="margin: 15px 0;">
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @onchange = "GetDisciplines(this,'search')" , @class = "CategorySearch" })
+        </div>
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.YearId, Model.Years)</div>
+        <div class="clear">
+        </div>
+    </div>
+    <div style="margin: 15px 0;">
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.Sex, Model.Sexs, new { @class = "SexSearch"})</div>
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.DisciplineId, Model.Disciplines, new { @class = "DisciplineSearch Disciplines" })</div>
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.MonthId, Model.Months)</div>
+        <div class="clear">
+        </div>
+    </div>
+    <div style="margin: 15px 0;">
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.SortBy, Model.Sorts)
+        </div>
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.CountryName, Model.Countries, new { @onchange = "GetProvinces(this,'Search')", @class="CountrySearch" })</div>
+        <div class="field" style="width: 230px; float: left;">
+            @Html.DropDownListFor(x => x.StateId, Model.Provinces, new { @class = "ProvinceSearch Provinces" })</div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="middle-hr">
+    </div>

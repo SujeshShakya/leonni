@@ -1,0 +1,148 @@
+﻿@model FrontModel
+@{
+    ViewBag.Title = "Front";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/fileuploader.css" />
+<div id="content-wrapper">
+    <div class="user-page">
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        <div class="profile-btns" style="margin-bottom: 53px">
+            <div class="blue-btn view-profile-btn">
+                <a href="~/ControlPanel/ViewProfile">update</a></div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class="middle-hr">
+        </div>
+        <div class="user-biodata">
+        <div class="field-2">
+                    <div style="width: 230px; float: left;" class="field">
+                        <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                            <noscript>
+                                <p>
+                                    Please enable JavaScript to use file uploader.</p>
+                                <!-- or put a simple form for upload here -->
+                            </noscript>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div>@Html.TextBoxFor(model => model.VideoLinkModel.VideoLinkUrl, new { @placeholder = "YouTube Link" })</div>                      
+                        <div style="margin:10px 0">@Html.TextBoxFor(model => model.FileLink, new { @placeholder = "Photo Link" })</div>
+                        <div><input type="file" name="BannerPic" /></div>
+                    </div>
+                    <div style="width: 120px; float: left;" class="blue-btn">
+                        <input type="submit" value="Load" style="margin-left: 4px; padding:3px 15px;" />
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="middle-hr" style="margin:10px 0"></div>
+            <div style="font-size: 16px; font-weight: bold; margin-bottom: 20px;">Home Page</div>
+            @using (Html.BeginForm("Front", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="clear">
+                </div>
+            }
+            @*@{Html.RenderAction("FrontSearch", "ControlPanel", new{ sectionId=2 });}*@
+            @{HttpContext.Current.Items["one"] = 0;
+              Html.RenderAction("FrontSearch", "ControlPanel");}
+            <div class="middle-hr">
+            </div>
+            <div class="clear">
+            </div>
+            <div style="font-size: 16px; font-weight: bold; margin: 20px 0;">
+                Sections</div>
+            @* @{Html.RenderAction("FrontSearch", "ControlPanel", new { area = "" });}*@
+            @Html.Partial("_FrontSection")
+        </div>
+    </div>
+    @section RightMenu
+{
+        @{Html.RenderPartial("NormalRightMenu");}
+    }
+    @section Scripts{
+        @*<script src="~/Scripts/AddRowVideoLink.js" type="text/javascript"></script>*@
+        <script src="~/Scripts/ui.dropdownchecklist-1.4-min.js" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+        <script src="~/Scripts/PopulateDropDowns.js" type="text/javascript"></script>
+        <script type="text/javascript" src="~/Scripts/fileuploader.js"></script>
+    }
+    <script type="text/javascript">
+        function ajaxSuccess(data) {
+            window.location.href = LeonniUrl("/ControlPanel/Front");
+        }
+
+        function ajaxBegin(sender, xhr) {
+            return true;
+        }
+
+
+        var frontList = function () {
+            $.ajax({
+                url: LeonniUrl("ControlPanel/FrontList"),
+                dataType: "html",
+                data: {},
+                type: "POST"
+            }).done(function (result) {
+                $("#user-list-partial").html(result);
+                var pageitems = 0;
+                var i = 0;
+                var pagination = "<a href='javascript:void(0);' class = 'previous-user-list'>Previous </a>";
+                var pages = "";
+                while (pageitems < result.listcount) {
+                    pageitems += 3;
+                    i++;
+                    pages = pages + "<a href='javascript:void(0);' id='page-number-5user-list-" + i + "' class='page-number-user-list'>'" + i + "'</a>";
+
+                }
+                pagination = pagination + pages + "<a href='javascript:void(0);' class ='next-user-list'>Next</a>";
+
+                $("#pagination").html(pagination);
+            });
+
+        };
+
+
+        if ($(".user-biodata").length > 0) {
+            //frontList();
+        }
+    </script>
+    <script type="text/javascript">
+
+        var uploader = new qq.FileUploader({
+            element: document.getElementById('file-uploader'),
+            onSubmit: function (id, fileName) {
+                // --- add postdata parameters
+                uploader.setParams({ id: 18897, selectedFileName: fileName });
+            },
+            // validation    
+            // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
+            allowedExtensions: ['BMP', 'JPG', 'GIF', 'PNG', 'JPEG'],
+            // each file size limit in bytes
+            // this option isn't supported in all browsers
+            //sizeLimit: 200, // max size   
+            // minSizeLimit: 200, // min 
+            action: LeonniUrl("/ControlPanel/Upload/"),
+            autoUpload: false,
+            uploadButtonText: "Select Files",
+            onComplete: function (id, fileName, responseJSON) {
+                $("#banner").html("<img src='/content/images/guia.jpg' alt='' class=''/>");
+                //        $(".resize").aeImageResize({ height: 135, width: 123 });
+                //        $(".resize").show();
+
+            }
+
+            //    success: function (data) {
+
+            //    }
+        });
+
+        $('#triggerUpload').click(function () {
+            uploader.uploadStoredFiles();
+        });
+
+    </script>

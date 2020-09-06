@@ -1,0 +1,50 @@
+﻿@model LanguageModel
+@{
+    ViewBag.Title = "Language Create";
+}
+<h2 class="txt">
+    Enter Language:</h2>
+@using (Html.BeginForm("Create", "Language", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form_col">
+        <label class="firstchild">
+            Language:</label>
+        @Html.TextBoxFor(x => x.LanguageName, new { id = "cursorFocus", @class = "input_box" })*
+        @Html.ValidationMessageFor(x => x.LanguageName)
+    </div>
+    <div class="form_col">
+        <label class="firstchild">
+            Enter LanguageCode:</label>
+        @Html.TextBoxFor(x => x.LanguageCode) *
+        @Html.ValidationMessageFor(x => x.LanguageCode)
+    </div> 
+    <div class="form_col">
+        <label class="firstchild">
+            Language Direction:</label>
+        @Html.DropDownListFor(x => x.LanguageDirection, ViewData["LanguageDirection"] as SelectList, "-- Select --")
+        *
+    </div>
+    <div class="form_col">
+        <label class="firstchild">
+            Upload Country Flag:</label>
+        <input type="file" id="fileUpload" name="fileUpload" />* [ * .png]
+    </div>
+    <div class="form_col1">
+     <label class="firstchild">
+            &nbsp</label>
+        <span style="color: Red">Note: Field Marked with * is Mandatory </span>
+    </div>
+    <div class="but_wrap1">
+        <div class="lft_but">
+            <span class="input_button but_orange">
+                <input type="submit" value="Save" name="submitBtn" />
+            </span>
+        </div>
+        <div class="lft_but">
+            <span class="input_button but_orange">
+                <input type="button" value="Cancel" id="CancelBtn" />
+            </span>
+        </div>
+    </div>
+    
+}

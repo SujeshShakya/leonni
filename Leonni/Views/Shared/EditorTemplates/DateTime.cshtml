@@ -1,0 +1,18 @@
+﻿@model DateTime?
+@if (Model.HasValue && Model.Value == default(DateTime))
+{
+    @Html.TextBox("", string.Empty, new { @class = "datepicker" })
+    
+}
+else if (Model.HasValue && Model.Value != default(DateTime))
+{ 
+    @Html.TextBox("", Model.Value.ToShortDateString(), new { @class = "datepicker" })
+}
+<script type="text/javascript">
+    $('.datepicker').datepicker({
+        dateFormat: "mm/dd/yy",
+        showOn: "button",
+        buttonImage: LeonniUrl("/Images/cal_btn.jpg"),
+        buttonImageOnly: true
+    });
+</script>

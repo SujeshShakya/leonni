@@ -1,0 +1,74 @@
+﻿@model TranslationIndexView
+@{
+    ViewBag.Title = "Index";
+}
+<div class="">
+    @using (Html.BeginForm("Export", "Translation"))
+    {
+        <div class="lang_form">
+            @Html.LabelFor(x => x.LanguageId, "Language"):
+            @Html.DropDownListFor(x => x.LanguageId, new SelectList(Model.Languages, "Id", "LanguageName"), "-- Select --")
+            @Html.ValidationMessageFor(x=>x.LanguageId)
+        </div>
+        <div class="lang_form">
+            @Html.LabelFor(x => x.Classification, "Classifications"):
+            @Html.DropDownListFor(x => x.Classification, new SelectList(Model.TranslationClassifications), "-- Select --")
+            @Html.ValidationMessageFor(x=>x.Classification)
+        </div>
+        <div>
+            <span>
+                <input type="submit" value="Export"/>
+            </span>
+        </div>
+    }
+    @using (Html.BeginForm("Import", "Translation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="lang_form">
+            @Html.Label("Content", "Content"):
+            <input type="file" name="Content" id="TranslationContent" />
+        </div>
+        <div >
+            <span >
+                <input type="submit" value="Import" />
+            </span>
+        </div>
+    }
+</div>
+<div class="bot_form">
+    @using (Html.BeginForm("ExportEmail", "Translation"))
+    {
+        <div class="lang_form">
+            @Html.LabelFor(x => x.LanguageId, "Language"):
+            @Html.DropDownListFor(x => x.LanguageId, new SelectList(Model.Languages, "Id", "LanguageName"), "-- Select --")
+        </div>          
+        <div class="lang_form">
+            @Html.LabelFor(x => x.EmailType, "Email Type"):
+            @Html.DropDownListFor(x => x.EmailType, new SelectList(Model.EmailTypes))
+        </div>
+        <div>
+            <span>
+                <input type="submit" value="Export" />
+            </span>
+        </div>
+    }
+    @using (Html.BeginForm("ImportEmail", "Translation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {       
+        <div class="lang_form">
+            @Html.LabelFor(x => x.EmailType, "EmailType"):
+            @Html.DropDownListFor(x => x.EmailType, new SelectList(Model.EmailTypes))
+        </div>
+        <div class="lang_form">
+            @Html.Label("Content", "Content"):
+            <input type="file" name="Content" id="EmailContent" />
+        </div>
+        <div class="but_wrap green">
+            <span>
+                <input type="submit" value="Import" />
+            </span>
+        </div>
+    }
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}

@@ -1,0 +1,202 @@
+﻿@model UserProfileModel
+@{
+    ViewBag.Title = "Profile";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/fileuploader.css" />
+<div id="content-wrapper">
+    <div class="user-page">
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        @using (Html.BeginForm("Profile", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.IsNew)
+            @Html.HiddenFor(x => x.Id)
+            if (Model.IsNew)
+            {
+            <div class="blue-btn view-profile-btn">
+                <input type="submit" id="submit_link" value="Create Profile" /></div>
+            }
+            else
+            {
+            <div class="profile-btns" style="margin-top: -8px;">
+                <div class="blue-btn view-profile-btn">
+                    <input type="submit" id="submit_link" value="Update" /></div>
+                @if (Model.CurrentRole != "Administrator")
+                {
+                    <div class="blue-btn update-btn">
+                        <a href="/ControlPanel/ViewProfile/@Model.Id"  onclick="ViewProfile()">View Profile</a></div>
+                }
+            </div>
+            
+            <div class="clear">
+            </div>
+            }
+            <div class="user-biodata">
+                <div class="field-1">   
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(model => model.FirstName, new { @placeholder = "First Name", title = "First Name" })
+                        @Html.ValidationMessageFor(model => model.FirstName)</div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(model => model.SurName, new { @placeholder = "Last Name", title = "Last Name" })
+                        @Html.ValidationMessageFor(model => model.SurName)</div>
+                    @*<div class="field">
+                        <input type="file" name="ProfilePic" title="Profile Picture" />
+                        @Html.ValidationMessageFor(model => model.ProfilePic)
+                    </div>*@
+                    <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                    <noscript>
+                        <p>
+                            Please enable JavaScript to use file uploader.</p>
+                        <!-- or put a simple form for upload here -->
+                    </noscript>
+                    </div>
+                    @Html.HiddenFor(x => x.FileId,new {id = "imgid"})                                     
+                </div>
+                <div class="clear">
+                </div>
+                <div class="field-2">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @onchange = "GetDisciplines(this,'entry')", title="Categories" })
+                    </div>
+                    <div class="field pad-field">
+                        @if (Model.IsNew == true || Model.CurrentRole == "Administrator")
+                        {
+                            @Html.DropDownListFor(x => x.DisciplineId, Model.Disciplines, new { @class = "Disciplines", title = "Discipline" })
+                        }
+                        else
+                        { 
+                            @Html.DropDownListFor(x => x.DisciplineId, (SelectList)ViewBag.DisciplineId, new { @class = "Disciplines", title = "Discipline" })
+                        }
+                    </div>
+                    <div class="upload-img">
+                        <img alt="" src="/en-US/File/Picture/121?width=150&amp;height=200">
+                        </div>
+                </div>
+                <div id="profilepic">
+                    <img src="http://localhost:4443/en-US/file/picture?id=@Model.FileId&width=150&height=200" alt="" />
+                        @*<img src="@Url.Action("Picture", "File", new { id = @Model.Id, width = 150, height = 120 })" alt=""/>*@
+                    </div>
+                <div class="clear">
+                </div>
+                <div class="field-3">
+                    <div class="summary-field">
+                        @Html.TextBoxFor(model => model.Summary, new { @placeholder = "Summary 120 characters", title = "Summary" })
+                    </div>
+                    <div class="summary">
+                        @Html.TextAreaFor(model => model.Description, new { @placeholder = "Description", title = "Summary" })
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Occupation, new { @placeholder = "Occupation", title = "Occupation" })</div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Company, new { @placeholder = "Company", title = "Company" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.Sex, Model.Sexs, new { title = "Sex" })</div>
+                    <div class="field">
+                        @Html.EditorFor(x => x.BirthDate, new { @placeholder = "BirthDate", title = "Birth Date" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Phone, new { @placeholder = "Phone No.", title = "Phone number" })</div>
+                    <div class="field pad-field" style="width: 230px; float: left;">
+                        @Html.TextBoxFor(x => x.WebLink, new { @placeholder = "WebLink", title = "Web Link" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field">
+                        @Html.DropDownListFor(x => x.CountryName, Model.Countries, new { @onchange = "GetProvinces(this,'entry')", @class = "CountryName", title = "Country" })</div>
+                    <div class="field">
+                        @if (Model.IsNew || Model.CurrentRole == "Administrator")
+                        {
+                            @Html.DropDownListFor(x => x.StateId, Model.Provinces, new { @class = "Provinces", title = "Province" })
+                        }
+                        else
+                        { 
+                            @Html.DropDownListFor(x => x.StateId, (SelectList)ViewBag.ProvinceId, new { @class = "Provinces", title = "Province" })
+                        }
+                    </div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Locality, new { @placeholder = "Locality", title = "Locality" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.Address, new { @placeholder = "Address", title = "Address" })
+                        @Html.ValidationMessageFor(x => x.Address)
+                    </div>
+                    <div class="field pad-field">
+                        @Html.TextBoxFor(x => x.ZipCode, new { @placeholder = "Zip Code", title = "Zip Code" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                @if (Model.CurrentRole == "Administrator")
+                {
+                    Html.RenderAction("ProfileSearch", "ControlPanel");
+                }
+            </div>
+           
+        }
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+<script type="text/javascript" src="~/Scripts/fileuploader.js"></script>
+<script src="~/Scripts/GlobalSearch.js" type="text/javascript"></script>
+<script src="~/Scripts/Profile.js" type="text/javascript"></script>
+<script src="~/Scripts/AdminOptions.js" type="text/javascript"></script>
+<script type="text/javascript">
+    if ($("#user-list-partial").length > 0) {
+        List(currentPageNumber, takeNumber, "users");
+    }
+
+
+    var uploader = new qq.FileUploader({
+        element: document.getElementById('file-uploader'),
+        onSubmit: function (id, fileName, contentType, Content) {
+            // --- add postdata parameters
+            uploader.setParams({ selectedFileName: fileName, selectedContentType: contentType, Content: Content });
+        },
+        // validation    
+        // ex. ['jpg', 'jpeg', 'png', 'gif'] or []
+        allowedExtensions: ['BMP', 'JPG', 'GIF', 'PNG', 'JPEG'],
+        // each file size limit in bytes
+        // this option isn't supported in all browsers
+        //sizeLimit: 200, // max size   
+        // minSizeLimit: 200, // min 
+        action: LeonniUrl("/ControlPanel/ProfilePhotoUpload/"),
+        onComplete: function (id, fileName, responseJSON) {
+            console.log(responseJSON);
+            //$("#banner").html("<img src='/content/images/guia.jpg' alt='' class=''/>");
+            //$("#banner").html("<img src='/en-US/File/Picture/"+ id +"?width=720&height=234' alt='' class=''/>");
+            //var url = LeonniUrl("File/Picture?id=" + responseJSON.id + "&width=720&height=234");
+            var url = "http://localhost:4443/en-US/File/Picture?id=" + responseJSON.id + "&width=720&height=234";
+            //var url = "http://localhost:4443/en-US/File/Picture?id=" + 100 + "&width=720&height=234";
+
+            $("#profilepic").html("<img src = '" + url + "' alt='' class=''/>");
+            $("#imgid").val(responseJSON.id);
+
+            //        $(".resize").aeImageResize({ height: 135, width: 123 });
+            //        $(".resize").show();
+
+        }
+
+        //    success: function (data) {
+
+        //    }
+    });
+</script>

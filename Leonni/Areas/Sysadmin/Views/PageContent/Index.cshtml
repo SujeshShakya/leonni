@@ -1,0 +1,113 @@
+﻿@model List<PageContentModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+@if (@ViewBag.Success != null)
+{
+    @ViewBag.Success
+}
+<h2 class="txt">
+    Page Content</h2>
+<div class="create_but_last1">
+    <div id="lft">
+    </div>
+    <div id="mid">
+        <h3 class="">@Html.ActionLink("Create", "Create")</h3>
+    </div>
+    <div id="rgt">
+    </div>
+</div>
+<table id="PageList"></table>
+<table  style="display:none" cellpadding="0" cellspacing="1" class="user_wrap language">
+    <thead>
+        <tr class="list_header">
+            <td class="url">
+                Page URL
+            </td>
+            <td class="lang">
+                Language
+            </td>
+            <td class="name">
+                Page Name
+            </td>
+            <td class="edit">
+                Edit
+            </td>
+            <td class="delete col5_lst">
+                Delete
+            </td>
+        </tr>
+    </thead>
+    @{int i = 1;
+
+      foreach (var item in Model)
+      {
+          //string classname = Html.AlternativeRow(i).ToString();
+        <tr class='classname'>
+            <td class="url">
+                <h3>@item.PageUrl</h3>
+            </td>
+            <td class="lang">
+                <h3>@item.LanguageId</h3>
+            </td>
+            <td class="name">
+                <h3>
+                    @item.PageName</h3>
+            </td>
+            <td class="edit">
+                <h3 class="edit_icon">
+                    @Html.ActionLink("Edit", "Edit", new { id = @item.PageId })
+                </h3>
+            </td>
+            <td class="delete col5_lst">
+                <h3 class="delete_icon">
+                    <a href="#" data-Id="@item.PageId"  class="lnk-delete">Delete</a>
+                    @using (Html.BeginForm("Delete", "PageContent", new { id = item.PageId }, FormMethod.Post, new { style = "display:none;" }))
+                    { 
+                        <input class='subbutton' type="button" value="Cancel" /> 
+                        <input type="submit" value="Sure?" class="subbutton" />
+                    }
+                </h3>
+            </td>
+        </tr>
+                    i++;
+      }
+    }
+</table>
+
+<link href="~/Content/flexigrid.pack.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/flexigrid.pack.js" type="text/javascript"></script>
+
+<script type="text/javascript" language="javascript">
+
+    function RemoveRow(id) {
+        $('#' + id).remove();
+        $("#PageList").flexReload();
+    }
+
+    $("#PageList").flexigrid({
+        url: LeonniUrl("/PageContent/AjaxGetPageContents"),
+        dataType: 'json',
+        onError: function (data) {
+            if (data.status == "401")
+            { }
+            //  window.location.href = InViewUrl("");
+        },
+        colModel: [
+		{ display: 'Page Url', name: 'PageUrl', width: 150, sortable: true, align: 'left' },
+		{ display: 'Language', name: 'LanguageName', width: 150, sortable: true, align: 'left' },
+		{ display: 'Page Name', name: 'PageName', width: 150, sortable: true, align: 'left' },
+        { display: 'Action', name: 'Action', width: 150, sortable: false, align: 'left' },
+
+		],
+        sortname: "",
+        sortorder: "asc",
+        width: 975,
+        height: 150,
+        striped: false,
+        showTableToggleBtn: true,
+        usepager: true
+    });
+
+</script>

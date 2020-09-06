@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{52894DE7-9CBC-45AC-B396-FCEDFD0E0C9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Leonni.Repositories</RootNamespace>
+    <AssemblyName>Leonni.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="AdvertisementRepository.cs" />
+    <Compile Include="CommentRepository.cs" />
+    <Compile Include="CommentThreadRepository.cs" />
+    <Compile Include="FavouriteRepository.cs" />
+    <Compile Include="LikeRepository.cs" />
+    <Compile Include="MessagesRepository.cs" />
+    <Compile Include="FrontContentRepository.cs" />
+    <Compile Include="FrontEntityFileRepository.cs" />
+    <Compile Include="SectionRepository.cs" />
+    <Compile Include="CountryRepository.cs" />
+    <Compile Include="EntityFileRepository.cs" />
+    <Compile Include="FileRepository.cs" />
+    <Compile Include="GroupRepository.cs" />
+    <Compile Include="LeonniDbContext.cs" />
+    <Compile Include="ProjectRepository.cs" />
+    <Compile Include="ProvinceRepository.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="MonthRepository.cs" />
+    <Compile Include="PublicationRepository.cs" />
+    <Compile Include="UserProfileRepository.cs" />
+    <Compile Include="VideoLinkRepository.cs" />
+    <Compile Include="YearRepository.cs" />
+    <Compile Include="DisciplineRepository.cs" />
+    <Compile Include="TranslationRepository.cs" />
+    <Compile Include="LanguageRepository.cs" />
+    <Compile Include="PageContentRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Leonni.Data\Leonni.Models.csproj">
+      <Project>{F2B5B3F1-20A2-4902-8E0D-A053E16ABB55}</Project>
+      <Name>Leonni.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Leonni.Interfaces\Leonni.Interfaces.csproj">
+      <Project>{58C92473-B293-4B89-9182-565506E19073}</Project>
+      <Name>Leonni.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+@model Leonni.Models.ViewModels.BaseViewModel
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @if (Request.IsLocal)
+    { 
+      @*  <script src="~/Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery-ui-1.8.11.min.js" type="text/javascript"></script>*@
+        <script src="~/Scripts/jquery-1.8.3.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery-ui-1.9.2.custom.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>   
+        <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+        <script src="~/Scripts/GlobalMessage.js" type="text/javascript"></script>
+    }
+    else
+    { 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.8.11/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>   
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.8.1/jquery.validate.min.js"
+            type="text/javascript"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.validate.unobtrusive.min.js"
+            type="text/javascript"></script>
+    }
+    @*  <link href="~/Content/style.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        var LeonniUrl = function (url) {
+            var baseUrl = '@Url.Content("~/")';
+            return baseUrl + url.replace(/^\//, "");
+        }
+        $(function () {
+            $(document).tooltip();
+        });
+    </script>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="global-error-success-message">@Html.RenderGlobalMessage()</div>
+    <div id="wrapper">
+        <div id="left">
+            <div id="left-wrapper">
+                <section class="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <div class="left-hr">
+                </div>
+                <div id="menu">
+                    <div class="head">
+                        Menu</div>
+                    <ul>
+                        <li><a href="~/User/Index">@Html.Translate("ControlGroup", "Users")</a></li>
+                        <li><a href="~/Group/Index">@Html.Translate("ControlGroup", "Groups")</a></li>
+                        <div class="left-hr">
+                        </div>
+                        <li><a href="~/Publication/Index">@Html.Translate("ControlGroup", "Publications")</a></li>
+                        <li><a href="~/Link/Index">@Html.Translate("ControlGroup", "Links")</a></li>
+                        <li><a href="~/Activity/Index">@Html.Translate("ControlGroup", "Activities")</a></li>
+                        <li><a href="~/Gallery/Index">@Html.Translate("ControlGroup", "Galleries")</a></li>
+                        <li><a href="~/Store/Index">@Html.Translate("ControlGroup", "Stores")</a></li>
+                        <li><a href="~/Guide/Index">@Html.Translate("ControlGroup", "Guide")</a></li>
+                        <div class="left-hr">
+                        </div>
+                        <li><a href="~/Team/Index">@Html.Translate("ControlGroup", "Team")</a></li>
+                        <li><a href="~/Project/Index">@Html.Translate("ControlGroup", "Project")</a></li>
+                        <div class="left-hr">
+                        </div>
+                        <li><a href="~/Help/Index">@Html.Translate("ControlGroup", "Help")</a></li>
+                        <div class="left-hr">
+                        </div>
+                        <li><a href="~/OnLeonni/Index">@Html.Translate("ControlGroup", "OnLeonni")</a></li>
+                        <li><a href="~/Disclaimer/Index">@Html.Translate("ControlGroup", "Disclaimer")</a></li>
+                        <div class="left-hr">
+                        </div>
+                        @Html.LanguageDropDown()
+                        @*<li>English</li>
+                        <li>Espanol</li>*@
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @if (ViewBag.CurrentMainTab != null && ViewBag.CurrentSubTab == null)
+                { 
+                    <div id="bread-crumb">You are here @*@Html.Translate("Navigation", "Youarein")*@&gt;<a href="javascript:void(0)"
+                        class="bread-initial"> @Html.Translate("Navigation", (string)ViewBag.CurrentMainTab)
+                    </a>
+                    </div>
+                }
+                else if (ViewBag.CurrentMainTab != null && ViewBag.CurrentSubTab != null && ViewBag.CurrentSuperSubTab == null)
+                { 
+                    <div id="bread-crumb">@Html.Translate("Navigation", "Youarein")&gt;<a href="javascript:void(0)"
+                        class="bread-initial">@ViewBag.CurrentMainTab</a>&gt;<a href="javascript:void(0)"
+                            class="bread-follow">@ViewBag.CurrentSubTab</a></div>
+                }
+                else if (ViewBag.CurrentMainTab != null && ViewBag.CurrentSubTab != null && ViewBag.CurrentSuperSubTab != null)
+                { 
+                    <div id="bread-crumb">@Html.Translate("Navigation", "Youarein")&gt;<a href="javascript:void(0)"
+                        class="bread-initial">@ViewBag.CurrentMainTab</a>&gt;<a href="javascript:void(0)"
+                            class="bread-follow">@ViewBag.CurrentSubTab</a>&gt;<a href="javascript:void(0)" class="bread-follow"><strong>@ViewBag.CurrentSuperSubTab</strong></a></div>
+                }
+                @RenderBody()
+            </section>
+        </div>
+        <div id="right">
+            <div id="right-wrapper">
+                <h1 class="title">
+                    <a href="~/Front/Index">
+                        <img src="~/Images/leonni-logo.png" /></a></h1>
+                @RenderSection("RightMenu", false)
+            </div>
+        </div>
+    </div>
+    @RenderSection("scripts", false)
+</body>
+</html>

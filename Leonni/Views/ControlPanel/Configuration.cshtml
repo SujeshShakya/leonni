@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Configuration";
+}
+
+<div id="content-wrapper">
+    <div class="user-page">
+        @*<div id="bread-crumb"><a href="javascript:void(0)" class="bread-initial">Control Panel</a>&gt;<a href="javascript:void(0)" class="bread-follow">Configuration</a></div>*@
+        <div class="middle-hr"></div>
+        <div class="clear"></div>
+        <div class="configuration-btns"><div class="blue-btn update-btn"><a href="#">update</a></div></div>
+        <div class="configuration">
+        <div class="configurationdrop-dwn">
+        <div class="dropdwn">
+        <select name="">
+            <option>aaa</option>
+        </select>
+        </div>
+        <div>
+        <select name="">
+            <option>aaa</option>
+        </select>
+        </div>
+        <div>
+        <select name="">
+            <option>aaa</option>
+        </select>
+        </div>
+        </div>
+        <div class="clear"></div>
+        <div class="chk-boxes">
+            <div class="chk">
+                <div class="chk-box"><input name="" type="checkbox" value="" /></div>
+                <div class="chk-list">Permitir mensajes privados desde mi ferfil.</div>
+            </div>
+            <div class="clear"></div>
+            <div class="chk">
+                <div class="chk-box"><input name="" type="checkbox" value="" /></div>
+                <div class="chk-list">Notificarme cauando publiquen en mis grupos.</div>
+            </div>
+            <div class="clear"></div>
+            <div class="chk">
+                <div class="chk-box"><input name="" type="checkbox" value="" /></div>
+                <div class="chk-list">Loriem Ipsum</div>
+            </div>
+            <div class="clear"></div>
+            <div class="chk">
+                <div class="chk-box"><input name="" type="checkbox" value="" /></div>
+                <div class="chk-list">Loriem Ipsum</div>
+            </div>
+            <div class="clear"></div>
+            <div class="chk">
+                <div class="chk-box"><input name="" type="checkbox" value="" /></div>
+                <div class="chk-list">Loriem Ipsum</div>
+            </div>
+        </div>
+
+        <div class="config config-email"><input type="text" value="Email"></div>
+        <div class="config config-pwd"><input type="text" value="Password"></div>
+        <div class="clear"></div>
+        <div class="middle-hr"></div>
+        <div class="config-deletebtns"><div class="red-btn delete-btn"><a href="#">Delete Account </a></div></div>
+        </div>
+    </div>
+
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}

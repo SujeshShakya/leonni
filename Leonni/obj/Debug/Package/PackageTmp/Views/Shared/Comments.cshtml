@@ -1,0 +1,357 @@
+﻿@{
+    var commentUrl = ViewData["Url"] ?? "";
+    var userID = "f22511dc-37d7-456d-9da7-2b9dbbe316e0";// ((MembershipUser)Session["CurrentUser"]).ProviderUserKey.ToString();
+    var profileId = ViewData["ProfileId"];
+    var fileId = ViewData["FileId"];
+    var entityId = ViewData["EntityId"];
+    var sectionId = ViewData["SectionId"];
+}
+
+<img id="loading" src="~/Content/Images/loadingfb.gif" alt='' />
+<div id='commentscontainer'>
+</div>
+<script src="~/Scripts/valum.fileuploader.mod.js" type="text/javascript"></script>
+<link href="~/Content/fileuploader.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+    $(function () {
+        var html = '', uploader;
+
+
+        var newcommentbox = '<div class="newcomment" style="width: 100%">';
+        newcommentbox += '<p id="newcommenterror"></p><textarea placeholder="Write your comment" id="newcomment"></textarea>';
+        newcommentbox += '<div id="file-upload-div"></div>';
+        newcommentbox += '<button id="toprated" type="btn" class="btn btn-success blue-btn input" value="Top Rated" >Top Rated</button><br />';
+        newcommentbox += '<button id="addcomment" type="btn" class="btn btn-success blue-btn input" value="Publish" >Publish</button>';
+        newcommentbox += '<ul id="chosenfiles" style="margin-top:10px;"></ul>';
+        newcommentbox += '</div>';
+
+        GetComments();
+
+        //        function UploaderInit() {
+        //            uploader = new qq.FileUploader({
+        //                multiple: true,
+        //                maxConnections: 5,
+        //                sizeLimit: 20971520,
+        //                allowedExtensions: ["bmp", "css", "cs", "cshtml", "csv", "doc", "docx", "eps", "epg", "ep", "gif", "htm", "html", "ico", "jpg", "odg", "odp", "ods", "odt", "pdf", "png", "ppt", "pptx", "psd", "rar", "rtf", "sql", "swf", "txt", "xcf", "xls", "xlsx", "xml", "xps", "zip"],
+        //                element: document.getElementById('file-upload-div'),
+        //                action: '@Url.Action("Upload", "File")',
+        //                template: '<div class="qq-uploader"><div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
+        //                '<div class="qq-upload-button btn btn-mini">Choose files to upload</div>' +
+        //                '<ul class="qq-upload-list"></ul></div>',
+        //                onComplete: function (id, fileName, responseJSON) {
+        //                    //console.log(id + '  ' + fileName + ' ' + responseJSON);
+        //                    var href = '@Url.Action("DownloadCommentFile", "File")' + '?id=' + responseJSON.fileid;
+        //                    $('#newcommentFiles_' + responseJSON.commentID).append('<a rel="tooltip" title="Download File" href="' + href + '">' + decodeURIComponent(fileName) + '</a> | ');
+        //                }
+        //            });
+        //        }
+
+        function GetCommentFiles(commentID, allfiles) {
+
+            var files = allfiles[commentID];
+            var markup = '<p>';
+            $.each(files, function (index, item) {
+                var href = '@Url.Action("DownloadCommentFile", "File")' + '?id=' + item.fileid;
+                markup += '<a rel="tooltip" title="Download File" href ="' + href + '">';
+                markup += decodeURIComponent(item.filename);
+                markup += '</a>';
+                if (index < files.length - 1)
+                    markup += " | "
+            });
+            return markup + '</p>';
+        }
+
+        function GetComments() {
+            $.ajax({
+                url: '@Url.Action("Get", "Comments")',
+                data: { 'commentUrl': '@commentUrl', 'profileId': '@profileId', 'entityId': '@entityId', 'sectionId': '@sectionId' },
+                dataType: 'json',
+                type: 'GET',
+                beforeSend: function () {
+                    $('#loading').show();
+                }
+            }).done(function (response) {
+                if (response) {
+                    if (response.comments) {
+                        html = '';
+                        $.each(response.comments, function (index, item) {
+                            var removebutton;
+                            //                            if (item.UserID != 'userID') {
+
+                            if (item.ProfileId == '@profileId' || item.CurrentUserRole == "Administrator") {
+                                removebutton = '<button title="Delete Comment" data-comment-id="' + item.ID + '" class="btn btn-mini pull-right btn-remove"><i class="icon icon-remove"></i></button>';
+                            }
+                            else {
+                                removebutton = '';
+                            }
+                            var imageUrl = 'http://localhost:4443/en-US/file/picture?id=' + item.ID; //LeonniUrl('/file/picture?id =' + 90 + 'width=150&height=200');
+                            html += '<div class="commentlist"  id="' + item.ID + '" >';
+
+                            if (item.FileId == null || item.FileId == 0 || item.FileId == "null") {
+                                html += '<img class="listimg" src="~/images/guest.jpg" WIDTH="80" HEIGHT="80" alt="" />';
+                            }
+                            else {
+                                html += '<img class="listimg" WIDTH="80" HEIGHT="80" src="http://localhost:4443/en-US/file/picture?id=' + item.FileId + '&width=150&height=200" alt="" />';
+                            }
+                            html += '<div class= "commentdesc">';
+                            html += '<h3 class="commentHead" ><strong>' + item.UserName + '</strong></h3>' + removebutton;
+                            html += '<div class="comment-date">' + item.Date + '</div>';
+
+                            html += '<div class="para">' + item.Body + '</div>';
+                            html += '<div class="like">';
+                            if (item.ShowLike == true) {
+                                html += '<a title="Like" data-like-id="' + item.ID + '" id="like_' + item.ID + '" class="pull-right like-text" style="color: #0088cc">Like</a>';
+                            }
+                            else {
+                                html += '<span title="Like" style="color: grey">Like</span>';
+                            }
+                            html += '&nbsp;&nbsp;' + '<span id = "likeCount_' + item.ID + '" style="color: #0088cc">';
+                            if (item.LikeCount > 0) {
+                                html += item.LikeCount;
+                            }
+                            html += '</span>';
+                            html += '</div>';
+                            //                            html += '<p>' + '<img src= "file/picture?id=' + item.FileId + '&width=150&height=200" alt="" />' + '<strong>' + item.UserName + '</strong> on ' + item.Date + ' said: </p>';
+                            //                            html += '<hr><p><strong>' + item.Body + '</strong>' + removebutton + '</p>';
+                            html += '<div class="clear"></div>';
+                            html += '</div>';
+                            html += '</div>';
+                        });
+                    }
+                    $('#commentscontainer').html(html);
+                    $('#loading').hide();
+                }
+            }).then(function () {
+                $('#commentscontainer').prepend(newcommentbox);
+                //UploaderInit();
+            });
+        }
+
+        function GetTopRatedComments() {
+            $.ajax({
+                url: '@Url.Action("GetTopRatedComments", "Comments")',
+                data: { 'commentUrl': '@commentUrl', 'profileId': '@profileId', 'entityId': '@entityId', 'sectionId': '@sectionId' },
+                dataType: 'json',
+                type: 'GET',
+                beforeSend: function () {
+                    $('#loading').show();
+                }
+            }).done(function (response) {
+                if (response) {
+                    if (response.comments) {
+                        html = '';
+                        $.each(response.comments, function (index, item) {
+                            var removebutton;
+                            //                            if (item.UserID != 'userID') {
+
+                            if (item.ProfileId == '@profileId' || item.CurrentUserRole == "Administrator") {
+                                removebutton = '<button title="Delete Comment" data-comment-id="' + item.ID + '" class="btn btn-mini pull-right btn-remove"><i class="icon icon-remove"></i></button>';
+                            }
+                            else {
+                                removebutton = '';
+                            }
+                            var imageUrl = 'http://localhost:4443/en-US/file/picture?id=' + item.ID; //LeonniUrl('/file/picture?id =' + 90 + 'width=150&height=200');
+                            html += '<div class="commentlist"  id="' + item.ID + '" >';
+
+                            if (item.FileId == null || item.FileId == 0 || item.FileId == "null") {
+                                html += '<img class="listimg" src="~/images/guest.jpg" WIDTH="80" HEIGHT="80" alt="" />';
+                            }
+                            else {
+                                html += '<img class="listimg" WIDTH="80" HEIGHT="80" src="http://localhost:4443/en-US/file/picture?id=' + item.FileId + '&width=150&height=200" alt="" />';
+                            }
+                            html += '<div class= "commentdesc">';
+                            html += '<h3 class="commentHead" ><strong>' + item.UserName + '</strong></h3>' + removebutton;
+                            html += '<div class="comment-date">' + item.Date + '</div>';
+
+                            html += '<div class="para">' + item.Body + '</div>';
+                            html += '<div class="like">';
+                            if (item.ShowLike == true) {
+                                html += '<a title="Like" data-like-id="' + item.ID + '" id="like_' + item.ID + '" class="pull-right like-text" style="color: #0088cc">Like</a>';
+                            }
+                            else {
+                                html += '<span title="Like" style="color: grey">Like</span>';
+                            }
+                            html += '&nbsp;&nbsp;' + '<span id = "likeCount_' + item.ID + '" style="color: #0088cc">';
+                            if (item.LikeCount > 0) {
+                                html += item.LikeCount;
+                            }
+                            html += '</span>';
+                            html += '</div>';
+                            html += '<div class="clear"></div>';
+
+                            html += '</div>';
+                            html += '</div>';
+                        });
+                    }
+                    $('#commentscontainer').html(html);
+                    $('#loading').hide();
+                }
+            }).then(function () {
+                $('#commentscontainer').prepend(newcommentbox);
+                $('#toprated').text('View All');
+                $('#toprated').val("View All");
+                //UploaderInit();
+            });
+        }
+
+        $('#newcomment').live('focus', function () {
+            $(this).removeClass('error');
+            $('#newcommenterror').hide();
+        });
+
+        function SetComment(commentBody) {
+            if (!$.trim(commentBody)) {
+                $('#newcomment').addClass('error');
+                $('#newcommenterror').html('<span class="error">Comment is required.</span>').show();
+                return;
+            }
+
+            $('#newcomment').removeClass('error');
+            $('#newcommenterror').hide();
+
+            $.ajax({
+                url: '@Url.Action("Set", "Comments")',
+                data: { 'commentUrl': '@commentUrl', commentBody: commentBody, 'entityId': '@entityId', 'sectionId': '@sectionId' },
+                dataType: 'json',
+                type: 'POST',
+                beforeSend: function () {
+                    $('#loading').show();
+                }
+            }).done(function (response) {
+                if (response && response.success) {
+                    $('.newcomment').remove();
+                    var comment = response.comment;
+                    var removebutton = '<button data-comment-id="' + comment.ID + '" class="btn btn-mini pull-right btn-remove"><i class="icon icon-remove"></i></button>';
+                    if (comment.ProfileId != '@profileId') {
+                        removebutton = '';
+                    }
+
+                    var newcomment = '';
+                    removebutton = '<button title="Delete Comment" data-comment-id="' + newcomment.ID + '" class="btn btn-mini pull-right btn-remove"><i class="icon icon-remove"></i></button>';
+
+                    newcomment += '<div class="commentlist"  id="' + comment.ID + '" >';
+
+                    if (comment.FileId == null || comment.FileId == 0 || comment.FileId == "null") {
+                        newcomment += '<img class="listimg" WIDTH="80" HEIGHT="80" src="~/images/guest.jpg" WIDTH=150 HEIGHT=100 alt="" />';
+                    }
+                    else {
+                        newcomment += '<img class="listimg" WIDTH="80" HEIGHT="80" src="http://localhost:4443/en-US/file/picture?id=' + comment.FileId + '&width=150&height=200" alt="" />';
+                    }
+                    newcomment += '<div class= "commentdesc">';
+                    newcomment += '<h3 class="commentHead"><strong>' + comment.UserName + '</strong></h3>' + removebutton;
+                    newcomment += '<div class="comment-date">' + comment.Date + '</div>';
+
+                    newcomment += '<div class="para">' + comment.Body + '</div>';
+                    //                    newcomment += '<p id="newcommentFiles_' + comment.ID + '">';
+                    //                    newcomment += '</p>';
+                    newcomment += '<div class="like">';
+                    //newcomment += '<div class="like">' + '<button title="Like" data-like-id="' + comment.ID + '" id="like_' + comment.ID + '" class="btn btn-mini pull-right btn-like"></button>' + '</div>';
+                    newcomment += '<a title="Like" data-like-id="' + comment.ID + '" id="like_' + comment.ID + '" class="pull-right like-text" style="color: #0088cc">Like</a>';
+
+                    newcomment += '&nbsp;&nbsp;' + '<span id = "likeCount_' + comment.ID + '" style="color: #0088cc">';
+                    if (newcomment.LikeCount > 0) {
+                        html += newcomment.LikeCount;
+                    }
+                    newcomment += '</span>';
+
+                    newcomment += '</div>';
+                    newcomment += '<div class="clear"></div>';
+                    newcomment += '</div>';
+                    newcomment += '</div>';
+                    //                    newcomment += '<pre class="comment"  id="' + comment.ID + '">';
+                    //                    newcomment += '<p>' + removebutton;
+                    //                    newcomment += '<strong>' + comment.UserName + '</strong> on ' + comment.Date + ' said: </p>';
+                    //                    newcomment += '<hr><p><strong>' + comment.Body + '</strong></p>';
+                    //                    newcomment += '<hr><p id="newcommentFiles_' + comment.ID + '">';
+                    //                    newcomment += '</p></pre>';
+
+                    $('#commentscontainer').prepend(newcomment);
+                    $('#loading').hide();
+
+                    //                    uploader.setParams({
+                    //                        'commentID': response.comment.ID
+                    //                    });
+                    //                    uploader.startUpload();
+
+                }
+            }).then(function () {
+                $('#commentscontainer').prepend(newcommentbox);
+                //                UploaderInit();
+            });
+        }
+
+        $('#addcomment').live('click', function () {
+            SetComment($('#newcomment').val());
+        });
+
+        $('#toprated').live('click', function () {
+            GetTopRatedComments($('#newcomment').val());
+            if ($('#toprated').attr("value") == "View All") {
+                GetComments($('#newcomment').val());
+            }
+        });
+
+        $('.btn-remove').live('click', function () {
+            if (confirm("Are you sure you want to delete this comment")) {
+                var commentID = $(this).attr('data-comment-id');
+                $.ajax({
+                    url: '@Url.Action("Delete", "Comments")',
+                    data: { 'id': commentID },
+                    dataType: 'json',
+                    type: 'POST',
+                    beforeSend: function () {
+                        $('#loading').show();
+                    }
+                }).done(function (response) {
+                    if (response && response.success) {
+                        $('#newcommentFiles_' + commentID).remove();
+
+                        $('div#' + commentID).remove();
+                    }
+                    $('#loading').hide();
+                });
+            }
+        });
+
+        $('.like-text').live('click', function () {
+
+            var commentID = $(this).attr('data-like-id');
+            $.ajax({
+                url: '@Url.Action("Like", "Comments")',
+                data: { 'id': commentID },
+                dataType: 'json',
+                type: 'POST',
+                beforeSend: function () {
+                    $('#loading').show();
+                }
+            }).done(function (response) {
+                if (response && response.success) {
+                    $('#like_' + commentID).remove();
+
+                    var count = $('#likeCount_' + commentID).html();
+                    if (count == "") {
+                        count = 0;
+                    }
+
+                    var count2 = parseInt(parseFloat(count)) + 1;
+
+
+                    $('#likeCount_' + commentID).text("like " + count2);
+                    //<span title="Like" style="color: grey">Like</span>';
+
+                    //                        $('pre#' + commentID).remove();
+                }
+                $('#loading').hide();
+            });
+
+        });
+
+    });
+</script>
+<style>
+    #commentcontainer pre
+    {
+        position: relative;
+    }
+</style>

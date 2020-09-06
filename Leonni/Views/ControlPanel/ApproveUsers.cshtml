@@ -1,0 +1,61 @@
+﻿@model ApproveUserModel
+@{
+    ViewBag.Title = "ApproveUsers";
+}
+<div class="users-select">
+<div class="select-header" style="margin-bottom:5px; padding-top:10px">
+<div style="width:200px; float:left; background:#ccc; padding:5px">Email Address</div>
+<div style="float:left; background:#ccc; padding:5px">Approved</div>
+</div>
+<div class="clear"></div>
+<div>
+@foreach (var item in Model.MembershipUsers)
+{
+        <div style="width:200px; float:left; padding:5px 0;">@item.Email </div>
+        <div  style="float:left; padding:5px 0;">@if (item.isApproved)
+        { 
+            <a href="javascript:void(0)" id="@("Approved" + item.id)" onclick="ApproveDisApprove('@item.id',this)">
+                DisApprove</a>
+        }
+        else
+        { 
+            <a href="javascript:void(0)"  id="@("Approved" + item.id)" onclick="ApproveDisApprove('@item.id',this)">
+                Approve</a>
+        }
+        </div>
+       
+       <div class="clear"></div>
+    
+}
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+<script type="text/javascript">
+    function ApproveDisApprove(id, element) {
+        if (confirm("Are you sure?")) {
+            $.ajax({
+                url: LeonniUrl("/ControlPanel/ApproveDisApprove"),
+                type: "POST",
+                data: { id: id },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "success") {
+                        if (response.message == "Approved") {
+                            $(element).html("DisApprove");
+                        }
+                        else {
+                            $(element).html("Approve");
+                        }
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errors);
+                    }
+                }
+
+            });
+        }
+    }
+</script>

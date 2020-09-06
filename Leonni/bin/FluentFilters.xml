@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentFilters</name>
+    </assembly>
+    <members>
+        <member name="M:FluentFilters.Criteria.ActionFilterCriteria.#ctor(System.String)">
+            <summary>
+            Filter by specified action
+            </summary>
+            <param name="actionName">Name of the action</param>
+        </member>
+        <member name="F:FluentFilters.Criteria.AreaFilterCriteria._areaName">
+            <summary>
+            Name of the area
+            </summary>
+        </member>
+        <member name="M:FluentFilters.Criteria.AreaFilterCriteria.#ctor">
+            <summary>
+            Filter by root area
+            </summary>
+        </member>
+        <member name="M:FluentFilters.Criteria.AreaFilterCriteria.#ctor(System.String)">
+            <summary>
+            Filter for specified area
+            </summary>
+            <param name="areaName">Name of the area</param>
+        </member>
+        <member name="M:FluentFilters.Criteria.ControllerFilterCriteria.#ctor(System.String)">
+            <summary>
+            Filter by specified controller
+            </summary>
+            <param name="controllerName">Name of the controller</param>
+        </member>
+        <member name="M:FluentFilters.IFilterCriteriaBuilder.Require(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria
+            </summary>
+        </member>
+        <member name="M:FluentFilters.IFilterCriteriaBuilder.Exclude(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add excluded criteria
+            </summary>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.Require(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.Exclude(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add excluded criteria
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.GetResults">
+            <summary>
+            Gets the results
+            </summary>
+        </member>
+        <member name="M:FluentFilters.IRequireResult.And(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.IRequireResult.Or(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria that will be used if previous required criteria chain are false
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.RequireResult.And(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.RequireResult.Or(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add required criteria that will be used if previous required criteria are false
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.RequireResult.GetLevel">
+            <summary>
+            Gets level for current required criteria chain
+            </summary>
+        </member>
+        <member name="M:FluentFilters.IExcludeResult.And(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add criteria for excluding
+            </summary>
+        </member>
+        <member name="M:FluentFilters.IExcludeResult.Or(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add criteria for excluding that will be used if previous chain of criteria which should be excluded are false
+            </summary>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.ExcludeResult.And(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add excluded criteria
+            </summary>
+            <param name="criteria">The criteria</param>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.ExcludeResult.Or(FluentFilters.IFilterCriteria)">
+            <summary>
+            Add criteria for excluding that will be used if previous chain of criteria which should be  excluded are false
+            </summary>
+            <param name="criteria">The criteria</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentFilters.FilterCriteriaBuilder.ExcludeResult.GetLevel">
+            <summary>
+            Gets level for current required criteria chain
+            </summary>
+        </member>
+    </members>
+</doc>

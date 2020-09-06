@@ -1,0 +1,182 @@
+﻿@model GroupModel
+@{
+    ViewBag.Title = "Groups";
+}
+<div id="content-wrapper">
+    <div class="user-page">
+        <div class="middle-hr">
+        </div>
+        <div class="clear">
+        </div>
+        @using (Html.BeginForm("Groups", "ControlPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x => x.Id)
+            @Html.HiddenFor(x => x.CreatedBy)
+            @Html.HiddenFor(m => m.IsNew)            
+
+            <div class="profile-btns" id="editMode">
+                <div class="blue-btn view-profile-btn" style="width: 146px; float: left;">
+                    <input type="submit" id="submit_link" value="Create Group" /></div>
+            </div>
+
+            <div class="user-biodata">
+                @Html.ValidationSummary(true)
+                <div>
+                    <div style="width: 500px; float: left;">
+                        <div class="field-1">
+                            <div class="check-content">
+                                <div class="chkbox">@Html.EditorFor(model => model.IsVisible)</div>
+                                <div>@Html.LabelFor(model => model.IsVisible)</div>
+                            </div>
+                            <div class="check-content">
+                                <div class="chkbox">@Html.EditorFor(model => model.IsCloseIncome)</div>
+                                <div>@Html.LabelFor(model => model.IsCloseIncome)</div>
+                            </div>
+                            <div class="check-content">
+                                <div class="chkbox">@Html.EditorFor(model => model.AllowContents)</div>
+                                <div>@Html.LabelFor(model => model.AllowContents)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div class="field-2">
+                        <div class="field">
+                            @Html.TextBoxFor(model => model.Title, new { title="Group Title"})
+                            @Html.ValidationMessageFor(model => model.Title)</div>
+                        <div class="field">
+                            @Html.DropDownListFor(model => model.DisciplineId, (SelectList)ViewBag.DisciplineId, new { title="Discipline"})
+                            @Html.ValidationMessageFor(model => model.DisciplineId)
+                        </div>
+                        <div class="field">
+                            @Html.ValidationMessageFor(model => model.GroupPic)
+                            <input type="file" name="GroupPic" title="Group Picture" />
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div class="field-3">
+                        <div class="summary-field">
+                            @Html.LabelFor(model => model.Summary)</div>
+                        <div class="summary">@Html.TextAreaFor(model => model.Summary, new { style = "width: 650px; height: 150px; ", title="Summary" })
+                            @Html.ValidationMessageFor(model => model.Summary)
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div style="margin: 20px 0">
+                        <div style="width: 207px; float: left;">
+                            @Html.DropDownListFor(x => x.CountryName, Model.Countries, new { @class = "CountryName", @onchange = "GetProvinces(this,'entry')",title="Country" })
+                        </div>
+                        <div style="width: 200px; float: left;">
+                            @Html.DropDownListFor(x => x.ProvinceId, Model.Provinces, new { @class = "Provinces",title="Province" })
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="middle-hr">
+        </div>
+        <div>
+            @{Html.RenderAction("GroupSearch", "ControlPanel");}
+        </div>
+    </div>
+</div>
+@section RightMenu
+{
+    @{Html.RenderPartial("NormalRightMenu");}
+}
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/GlobalSearch.js" type="text/javascript"></script>
+    <script src="~/Scripts/AdminOptions.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        if ($("#user-list-partial").length > 0) {
+            List(currentPageNumber, takeNumber, "groups");
+        }
+        function RemoveGroup(id) {
+            $('#' + id).remove();
+        }
+
+        $('#submit_link').click(function () {
+            if ($('#CountryName') == null) {
+                Leonni.ShowErrorMessage("Please select a country");
+                return false;
+
+            }
+            if ($('#Provinces').val() == 0) {
+                Leonni.ShowErrorMessage("Please select a state");
+                return false;
+            }
+
+            $('#y').click();
+        });
+
+        function EditGroup(groupId) {
+
+            $.ajax({
+                url: LeonniUrl("/ControlPanel/AjaxGetGroupById"),
+                type: "POST",
+                data: "id=" + groupId,
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "success") {
+
+                        var provinceList = response.lstProvince;
+                        var provinceDropdown = $('.Provinces').first();
+                        if (provinceList.length > 0) {
+                            provinceDropdown.empty();
+                            for (var i = 0; i < provinceList.length; i++) {
+                                provinceDropdown.append(new Option(provinceList[i].Name, provinceList[i].Id));
+                            }
+                        }
+
+                        $("#submit_link").val("Update");
+//                        $("#viewGroup").remove();
+//                        $("#editMode").append("<div class='blue-btn update-btn' id='viewGroup'><a href='ViewGroup/" + groupId + "'>see the group </a></div>")
+
+                        $("#Id").val(response.group.Id);
+                        $("#CreatedBy").val(response.group.CreatedBy);
+                        $("#Title").val(response.group.Title);
+                        $("#DisciplineId").val(response.group.DisciplineId);
+                        $("#Summary").val(response.group.Summary);
+                        $("#CountryName").val(response.group.CountryName);
+                        $("#ProvinceId").val(response.group.ProvinceId);
+                        if (response.group.IsVisible) {
+                            $("#IsVisible").attr('checked', 'checked');
+                        }
+                        else {
+                            $("#IsVisible").removeAttr('checked');
+                        }
+
+                        if (response.group.IsCloseIncome) {
+                            $("#IsCloseIncome").attr('checked', 'checked');
+                        }
+                        else {
+                            $("#IsCloseIncome").removeAttr('checked');
+                        }
+                        if (response.group.AllowContents) {
+                            $("#AllowContents").attr('checked', 'checked');
+                        }
+                        else {
+                            $("#AllowContents").removeAttr('checked');
+                        }
+                        $("#IsNew").val('false');
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errors);
+                    }
+                }
+
+            });
+
+        };
+
+        function ViewGroup(id, sectionId) {
+            window.location.href = LeonniUrl("ControlPanel/ViewGroup/" + id);
+        }
+    </script>
+}

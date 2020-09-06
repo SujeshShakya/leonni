@@ -1,0 +1,77 @@
+﻿@{List<GroupModel> lstGroupList = ViewBag.PagedListofUsers;}
+<div style="margin: 10px 0">
+    @ViewBag.TotalUserCount entries found
+</div>
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{int pageItems = 0;
+      int i = 0;
+
+      while (pageItems < ViewBag.TotalUserCount)
+      {
+          pageItems += 3;
+          i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+      }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>
+@if (lstGroupList != null)
+{
+    foreach (GroupModel item in lstGroupList)
+    {
+    <div class="search-result" data-ItemId="@item.Id" id="@item.Id">
+        <div style="width: 700px;">
+            <div class="search-image">
+                <a href="#" onClick="EditGroup('@item.Id')">
+                    <img src="@Url.Action("Picture", "File", new { id = item.FileId, width = 150, height = 200 })" alt="" />
+                </a>
+            </div>
+            <div class="searchresult-right">
+                <div class="search-content">
+                    <a href="#" class="name">@item.Title</a><a href="#" class="sub-name" onClick="EditGroup('@item.Id')">@item.DisciplineName</a><br />
+                    <div class="summery">@item.Summary</div>
+                </div>
+                <div class="clear">
+                </div>
+                <div style="margin-top: 33px;">
+                    <div class="search-data">
+                        <a href="#" class="categories">from &nbsp &nbsp 2010</a>
+                    </div>
+                    <div class="user-options-icons">
+                        <div class="group">
+                            <img src="~/images/Members.jpg" alt="M" /></div>
+                        <div class="number">
+                            23</div>
+                        <div class="comment">
+                            <img src="~/images/Comments.jpg" alt="C" /></div>
+                        <div class="number">
+                            23</div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class='options'>
+            <img src='~/images/option-drpdwn.jpg' alt="down"></div>
+        @Html.AdminOptions(item.Id, 2)
+    </div>
+    }
+}
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{ pageItems = 0;
+       i = 0;
+
+       while (pageItems < ViewBag.TotalUserCount)
+       {
+           pageItems += 3;
+           i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+       }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>

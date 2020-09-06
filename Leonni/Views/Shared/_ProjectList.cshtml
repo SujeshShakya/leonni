@@ -1,0 +1,200 @@
+﻿@{List<ProjectModel> lstProject = ViewBag.PagedListofUsers;}
+<div style="margin: 10px 0">
+    @ViewBag.TotalUserCount entries found
+</div>
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{int pageItems = 0;
+      int i = 0;
+
+      while (pageItems < ViewBag.TotalUserCount)
+      {
+          pageItems += 100;
+          i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+      }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>
+@if (lstProject != null)
+{
+    foreach (ProjectModel item in lstProject)
+    {
+    <div class="search-result" id="@item.Id">
+        <div style="width: 700px;">
+            <div class="searchresult-right">
+                <div class="search-content">
+                    <a href="#" class="name">@item.CreatedDate.Value.Year</a><a href="#" class="sub-name" onClick="EditProject('@item.Id')">@item.Title</a><br />
+                    <div class="summery">@item.Resume</div>
+                </div>
+                <div class="clear">
+                </div>
+                <div style="margin-top: 33px;">
+                    <div class="search-data">
+                        <a href="#" class="categories">@item.Cost &nbsp &nbsp  @item.Category.CategoryName &nbsp &nbsp @item.CountryName &nbsp &nbsp </a>
+                    </div>
+                    <div class="user-options-icons">
+                        <div class="group">
+                            <img src="~/images/visitors.jpg" alt="G" /></div>
+                        <div class="number">
+                            23</div>
+                        <div class="bookmark">
+                            <img src="~/images/Likes.jpg" alt="B" /></div>
+                        <div class="number">
+                            23</div>
+                        <div class="comment">
+                            <img src="~/Images/Comments.jpg" alt="C" /></div>
+                        <div class="number">
+                            23</div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <div class='options'>
+            <img src='~/images/option-drpdwn.jpg' alt="down"></div>
+        @Html.AdminOptions(item.Id, 1)
+    </div>
+   
+    }
+}
+<div class="pagination">
+    <a href="javascript:void(0);" class="previous-user-list">Previous</a>
+    @{ pageItems = 0;
+       i = 0;
+
+       while (pageItems < ViewBag.TotalUserCount)
+       {
+           pageItems += 100;
+           i++;
+        <a href="javascript:void(0);" id="@("page-number-user-list-" + i)" class="page-number-user-list">@i</a>
+       }
+    }
+    <a href="javascript:void(0);" class="next-user-list">Next</a>
+</div>
+<script type="text/javascript">
+    var id = 0;
+
+    $('.search-result').live('hover', function (event) {
+        if (event.type == 'mouseenter') {
+            // first function here
+            id = $(this).attr('id');
+            $(this).find(".options").show();
+        } else {
+            // second function here
+            $(this).parent().find('.adminOptions').hide();
+            $(this).find(".options").hide();
+            //$(this).find("div:last").remove();
+        }
+    });
+
+
+    $(".options").live('click', function () {
+        var container = $(this).parent().find('.adminOptions');
+        //alert(container.attr('style'));
+        if (container.attr('style') == 'display: none;' || container.attr('style') == 'undefined') {
+            $(this).parent().find('.adminOptions').show();
+        }
+        else if (container.attr('style') == 'display: block;') {
+            $(this).parent().find('.adminOptions').hide();
+        }
+        else {
+            $(this).parent().find('.adminOptions').show();
+        }
+        //$(this).die('click');
+    });
+
+    function AddRemovePublic(id) {
+        $.ajax({
+            url: LeonniUrl("/ControlPanel/AddRemovePublic"),
+            type: "POST",
+            data: { id: id, sectionId: 1 },
+            dataType: "json",
+            success: function (response) {
+                if (response.status == "success") {
+                    if (response.message == "added") {
+                        $("#Public" + id).html("Remove Public");
+                    }
+                    else {
+                        $("#Public" + id).html("Make Public");
+                    }
+                }
+                else if (response.status == "error") {
+                    Leonni.ShowErrorMessage(response.errors);
+                }
+            }
+
+        });
+    }
+
+    function DeleteContent(id, e) {
+
+        if (confirm("Are you sure to Delete?")) {
+            $.ajax({
+                url: LeonniUrl("/ControlPanel/DeleteContent"),
+                type: "POST",
+                data: { id: id, sectionId: 1 },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "success") {
+                        $(e).parents().find('#' + id).remove();
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errors);
+                    }
+                }
+
+            });
+        }
+
+    }
+
+    function DisableContent(id, e) {
+
+        if (confirm("Are you sure to Disable?")) {
+            $.ajax({
+                url: LeonniUrl("/ControlPanel/DisableContent"),
+                type: "POST",
+                data: { id: id, sectionId: 1 },
+                dataType: "json",
+                success: function (response) {
+                    if (response.status == "success") {
+                        $(e).parents().find('#' + id).remove();
+                    }
+                    else if (response.status == "error") {
+                        Leonni.ShowErrorMessage(response.errors);
+                    }
+                }
+
+            });
+        }
+
+    }
+
+    function AddRemoveFromTeam(id) {
+        $.ajax({
+            url: LeonniUrl("/ControlPanel/AddRemoveFromTeam"),
+            type: "POST",
+            data: { id: id },
+            dataType: "json",
+            success: function (response) {
+                if (response.status == "success") {
+                    if (response.message == "added") {
+                        $("#Team" + id).html("Remove From Team");
+                    }
+                    else {
+                        $("#Team" + id).html("Add To Team");
+                    }
+                }
+                else if (response.status == "error") {
+                    Leonni.ShowErrorMessage(response.errors);
+                }
+            }
+
+        });
+    }
+
+</script>

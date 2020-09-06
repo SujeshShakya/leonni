@@ -1,0 +1,42 @@
+﻿@model UploadModel
+ 
+ @using (Ajax.BeginForm("ProjectUpload", "ControlPanel",new { enctype = "multipart/form-data" }, new AjaxOptions { OnBegin = "OnBegin", OnSuccess = "OnSuccess" }))
+        {
+            <div id='TextBoxesGroup'>
+                @Html.ValidationSummary(true)
+                <div id="TextBoxDiv1" class="TextBoxDiv">
+                    <div class="add-remove">
+                        @*<input type="submit" style="margin-left: 4px;"  />*@ @* <input type="button" class="btnRemove btnRemoveHS" />*@
+                        &nbsp;&nbsp;<span id="errDurationIntermediate1" class="errmsg"></span>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear">
+            </div>
+            <div class="field-2">
+                <div style="width: 230px; float: left;" class="field">
+                    <div id="file-uploader" style="width: 230px; float: left;" class="field">
+                        <noscript>
+                            <p>
+                                Please enable JavaScript to use file uploader.</p>
+                            <!-- or put a simple form for upload here -->
+                        </noscript>
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.TextBoxFor(model => model.VideoLinkModel.VideoLinkUrl, new { @placeholder = "YouTube Link" })
+                    <br />
+                    @Html.TextBoxFor(model => model.FileLink, new { @placeholder = "Photo Link" })
+                    <input type="file" name="BannerPic" />
+                </div>
+                <div style="width: 120px; float: left;" class="blue-btn">
+                    <input type="submit" value="load" style="margin-left: 4px;" />
+                </div>
+            </div>
+      
+            <div class="clear">
+            </div>
+        }

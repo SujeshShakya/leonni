@@ -1,0 +1,33 @@
+﻿<div id="navbar">
+    <ul>
+        @{
+            string ContentClass = ViewBag.Contents ?? "";
+            string FontClass = ViewBag.Fonts ?? "";
+            string UsersClass = ViewBag.Users ?? "";
+            string CaptchaClass = ViewBag.Captcha ?? "";
+            string ReportClass = ViewBag.Report ?? "";
+
+
+            if (ContentClass.IsEmpty() && FontClass.IsEmpty() && UsersClass.IsEmpty() && CaptchaClass.IsEmpty())
+            { 
+            <li class="nosep"><a href="@Url.Action("Index", "Admin")" class="current">Home</a></li>
+            }
+            else
+            {
+            <li class="nosep"><a href="@Url.Action("Index", "Admin")">Home</a></li>
+            }
+
+            if (User.IsInRole("Administrator"))
+            {
+            
+            <li><a href="#" class='@ContentClass'>Contents</a>
+                <ul style="margin-top: 21px;">
+                    <li><a href="@Url.Action("Index", "Language")">Language</a></li>
+                    <li><a href="@Url.Action("Index", "Translation")">Translation</a></li>
+                    <li><a href="@Url.Action("Index", "PageContent")">Page Content</a></li>
+                </ul>
+            </li>
+            }
+        }
+    </ul>
+</div>
